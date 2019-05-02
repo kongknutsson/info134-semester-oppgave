@@ -43,7 +43,7 @@ h1 {
   margin-bottom: 5vh;
 }
 
-#k_table {
+.tables {
   border: 1px solid black;
 }
 
@@ -115,6 +115,14 @@ span {
 #main{
   transition: margin-left 0.5s;
   padding: 20px;
+}
+
+#bottom {
+  position: absolute;
+  bottom: 2vh;
+  text-align: center;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 /*mindre skjerm*/
