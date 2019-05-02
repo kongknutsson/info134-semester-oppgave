@@ -1,0 +1,109 @@
+body {
+  background-color: lightgrey;
+  font-family: "Lato", sans-serif;
+
+}
+
+h1{
+  font-size: 3vh;
+  color: hotpink;
+  font-family: inherit;
+}
+
+.int{
+  font-size: 3vh;
+  text-align: center;
+  padding: 20px 30px;
+  margin-top: 20vh;
+}
+
+#titleI{
+  font-size: 5vh;
+  text-align: center;
+}
+
+#Introduksjon{
+    display: block;
+}
+
+#Oversikt{
+  text-align: center;
+  display: none;
+}
+
+#Detaljer{
+  text-align: center;
+  display: none;
+}
+
+#Sammenligning{
+  text-align: center;
+  display: none;
+}
+
+/*links*/
+
+.link a:hover{
+  color: black;
+  transition: 0.3s;
+}
+
+/*button for nav*/
+span{
+    display: block;
+    width: 14vh;
+    height: 3vh;
+    padding:10px;
+    color: white;
+    background-color: darkred;
+    cursor:pointer;
+}
+
+/**navigator**/
+.mySidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: darkred;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.mySidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 3vh;
+  color: lightgreen;
+  display: block;
+  transition: 0.3s;
+}
+
+.mySidenav a:hover{
+  color: black;
+  background-color: darkred;
+}
+
+.mySidenav .closebtn{
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#main{
+  transition: margin-left 0.5s;
+  padding: 20px;
+}
+
+
+
+/*mindre skjerm*/
+@media screen and (max-width: 800px){
+  .sidenav{padding-top:15px;}
+  .sidenav a{font-size: 18px;}
+}

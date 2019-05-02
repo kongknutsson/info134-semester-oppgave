@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Semester oppgave</title>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <script src="myscript.js"></script>
+  </head>
+  <body>
+
+    <div class="mySidenav" id="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#" id="linkI" onclick="introduksjon()">Introduksjon</a>
+      <a href="#" onclick="oversikt()" id="linkO">Oversikt</a>
+      <a href="#" id="linkD" onclick="detaljer()">Detaljer</a>
+      <a href="#" id="linkS" onclick="sammenligning()">Sammenligning</a>
+    </div>
+
+  <span onclick="openNav()">☰ Hovedinnhold</span>
+
+    <div id= "main">
+      <div id="Introduksjon">
+        <h1 id="titleI">Introduksjon</h1>
+        <p class="int">Dette er en nettside som viser statistikk fra
+          offisielle SSB nettsider om <br>
+          <a href="http://data.ssb.no/api/v0/dataset/104857?lang=no">
+          Befolkning etter kjønn</a><br>
+          <a href="http://data.ssb.no/api/v0/dataset/100145?lang=no">
+          Sysselsatte pr 4.kv etter kjønn og alder</a><br>
+          <a href="http://data.ssb.no/api/v0/dataset/85432?lang=no">
+            Utdanningsnivå</a><br>
+            OBS! Dataene kan inneholde feil</p>
+      </div>
+
+      <div id="Oversikt">
+        <h1 id="titleO">Oversikt</h1>
+    <p>Oversikt</p>
+      </div>
+
+      <div id="Detaljer">
+        <h1 id="titleD">Detaljer</h1>
+
+      </div>
+
+      <div id="Sammenligning">
+        <h1 id="titleS">Sammenligning</h1>
+
+      </div>
+  </div>
+  </body>
+</html>
