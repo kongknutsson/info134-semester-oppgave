@@ -7,15 +7,6 @@ function closeNav(){
   document.getElementById("main").style.marginLeft = "0";
 }
 
-/* openIntroduksjon*/  document.getElementById("Introduksjon").style.display = "block";
-/*openOversikt*/  document.getElementById("Oversikt").style.display = "block";
-/*openDetalj*/  document.getElementById("Detaljer").style.display = "block";
-/*openSammenligning*/ document.getElementById("Sammenligning").style.display = "block";
-/* closeIntroduksjon*/ document.getElementById("Introduksjon").style.display = "none";
-/*closeOversikt*/ document.getElementById("Oversikt").style.display = "none";
-/* closeDetaljer*/ document.getElementById("Detaljer").style.display = "none";
-/*closeSammenligning*/ document.getElementById("Sammenligning").style.display = "none";
-
 function oversikt(){
   document.getElementById("Introduksjon").style.display = "none";
   document.getElementById("Detaljer").style.display = "none";
@@ -43,3 +34,30 @@ function sammenligning(){
   document.getElementById("Detaljer").style.display = "none";
   document.getElementById("Sammenligning").style.display = "block";
 }
+
+window.onload = function openBefolkning(){
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "http://wildboy.uib.no/~tpe056/folk/104857.json");
+  xhr.onreadystatechange = function(){
+    if (xhr.readyState === 4 && xhr.status === 200){
+      console.log("Type", xhr.getResponseHeader("Content-Type"));
+      console.log("Text", xhr.responseText);
+    }
+  };
+  xhr.send();
+}
+
+var data = {contains: kommunenummer};
+var payload = JSON.stringify(data);
+
+xhr.open("POST", "http://wildboy.uib.no/~tpe056/folk/104857.json");
+xhr.onreadystatechange = function(){
+  if (xhr.readyState === 4 && xhr.status === 200){
+    console.log("Type", xhr.getResponseHeader("Content-Type"));
+    console.log("Text", xhr.responseText);
+  }
+};
+
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.send(payload);
