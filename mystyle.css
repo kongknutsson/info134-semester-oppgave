@@ -1,10 +1,9 @@
 body {
   background-color: lightgrey;
   font-family: "Lato", sans-serif;
-
 }
 
-h1{
+h1 {
   font-size: 3vh;
   color: hotpink;
   font-family: inherit;
@@ -17,23 +16,41 @@ h1{
   margin-top: 20vh;
 }
 
-#titleI{
+#titleI {
   font-size: 5vh;
   text-align: center;
 }
 
-#Introduksjon{
+#Introduksjon {
     display: block;
 }
 
-#Oversikt{
+#Oversikt {
   text-align: center;
   display: none;
 }
 
-#Detaljer{
+#Detaljer {
   text-align: center;
   display: none;
+}
+
+#detaljer_input {
+  width: 10vw;
+  height: 5vh;
+  text-align: center;
+  font-size: 2vh;
+  margin-bottom: 5vh;
+}
+
+#k_table {
+  border: 1px solid black;
+}
+
+.info {
+  border: 1px solid black;
+  padding: 10px;
+  padding-right: 50px;
 }
 
 #Sammenligning{
@@ -49,9 +66,9 @@ h1{
 }
 
 /*button for nav*/
-span{
+span {
     display: block;
-    width: 14vh;
+    width: 10vw;
     height: 3vh;
     padding:10px;
     color: white;
@@ -99,8 +116,6 @@ span{
   transition: margin-left 0.5s;
   padding: 20px;
 }
-
-
 
 /*mindre skjerm*/
 @media screen and (max-width: 800px){
