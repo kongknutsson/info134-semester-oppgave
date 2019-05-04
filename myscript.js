@@ -1,11 +1,14 @@
 function openNav(){
+  if (window.matchMedia("(max-width: 960px)").matches) {
+    document.getElementById('sidenav').style.width = "180px";
+  } else {
   document.getElementById("sidenav").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
+  }
 }
 function closeNav(){
   document.getElementById("sidenav").style.width = "0";
-  document.getElementById("main").style.marginLeft = "0";
 }
+
 function oversikt(){
   document.getElementById("Introduksjon").style.display = "none";
   document.getElementById("Detaljer").style.display = "none";
@@ -58,7 +61,7 @@ function Befolkning(url){
     this.skjema = "ok";
   };
   this.getIDS = function(){};
-  this.getInfo = function (){};
+  this.getInfo = function(komNr){};
 }
 
 var bef = new Befolkning("http://wildboy.uib.no/~tpe056/folk/104857.json");

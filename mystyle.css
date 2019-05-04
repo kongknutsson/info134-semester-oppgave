@@ -1,12 +1,13 @@
 body {
-  background-color: lightgrey;
+  background-color: #dbe2ef;
   font-family: "Lato", sans-serif;
 }
 
 h1 {
-  font-size: 3vh;
-  color: hotpink;
+  font-size: 5vh;
+  color: #112d4e;
   font-family: inherit;
+  text-align: center;
 }
 
 .int{
@@ -14,11 +15,6 @@ h1 {
   text-align: center;
   padding: 20px 30px;
   margin-top: 20vh;
-}
-
-#titleI {
-  font-size: 5vh;
-  text-align: center;
 }
 
 #Introduksjon {
@@ -41,6 +37,11 @@ h1 {
   text-align: center;
   font-size: 2vh;
   margin-bottom: 5vh;
+}
+
+table.tables{
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .tables {
@@ -68,12 +69,13 @@ h1 {
 /*button for nav*/
 span {
     display: block;
-    width: 10vw;
-    height: 3vh;
+    width: auto;
+    height: auto;
     padding:10px;
-    color: white;
-    background-color: darkred;
+    color: black;
+    background-color: inherit;
     cursor:pointer;
+    font-size: 3vh;
 }
 
 /**navigator**/
@@ -84,24 +86,24 @@ span {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: darkred;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
+  background-color: black;
 }
 
 .mySidenav a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
-  font-size: 3vh;
-  color: lightgreen;
+  font-size: 2.5vh;
+  color: white;
   display: block;
   transition: 0.3s;
+  padding: 12px;
 }
 
 .mySidenav a:hover{
-  color: black;
-  background-color: darkred;
+  color: darkgrey;
 }
 
 .mySidenav .closebtn{
@@ -125,8 +127,20 @@ span {
   transform: translate(-50%, 0);
 }
 
-/*mindre skjerm*/
-@media screen and (max-width: 800px){
-  .sidenav{padding-top:15px;}
-  .sidenav a{font-size: 18px;}
+/*mobil og tablet mode*/
+@media only screen and (max-width: 960px) {
+  .mySidenav{
+    font-size: 2vh;
+    padding-top: 40px;
+  }
+  .mySidenav a{
+    font-size: 18px;
+  }
+  span{
+    font-size: 2.1vh;
+    width: auto;
+  }
+  .int{
+    font-size: 16px;
+  }
 }
