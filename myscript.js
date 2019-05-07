@@ -34,11 +34,9 @@ function sammenligning(){
   document.getElementById("Sammenligning").style.display = "block";
 }
 
-
 function Befolkning(url){
   this.load = loader(url);
   this.skjema = this.load;
-
   // laster inn URLen.
   function loader(link){
     var xhr = new XMLHttpRequest();
@@ -46,7 +44,6 @@ function Befolkning(url){
     xhr.send();
     if (xhr.readyState === 4 && xhr.status === 200){
       var skjema = JSON.parse(xhr.responseText);
-      addToOversikt(skjema);
       return skjema;
     }
   }
@@ -115,15 +112,6 @@ function test(url){
   console.log("TEST: prøver å hente ut info om kommunenummer 2030", test_objekt.getInfo("2030"));
 }
 
-
-// Tester forskjellige linker.
-var befolkning_url = "http://wildboy.uib.no/~tpe056/folk/104857.json";
-var sysselsatte_url = "http://wildboy.uib.no/~tpe056/folk/100145.json";
-var utdanning_url =  "http://wildboy.uib.no/~tpe056/folk/85432.json";
-test(befolkning_url);
-test(sysselsatte_url);
-test(utdanning_url);
-
 function detaljerSearcher() {
   // Declare variables
   var input, filter, table, tr, td, i, txtValue;
@@ -145,3 +133,19 @@ function detaljerSearcher() {
     }
   }
 }
+
+
+
+
+// Tester forskjellige linker.
+var befolkning_url = "http://wildboy.uib.no/~tpe056/folk/104857.json";
+var sysselsatte_url = "http://wildboy.uib.no/~tpe056/folk/100145.json";
+var utdanning_url =  "http://wildboy.uib.no/~tpe056/folk/85432.json";
+
+console.log(" -- -- BEFOLKNING:");
+test(befolkning_url);
+console.log(" -- -- SYSSELSATTE:");
+test(sysselsatte_url);
+console.log(" -- -- UTDANNING:");
+test(utdanning_url);
+
