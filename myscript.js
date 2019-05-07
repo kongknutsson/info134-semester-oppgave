@@ -1,11 +1,14 @@
 function openNav(){
+  if (window.matchMedia("(max-width: 960px)").matches) {
+    document.getElementById('sidenav').style.width = "180px";
+  } else {
   document.getElementById("sidenav").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
+  }
 }
 function closeNav(){
   document.getElementById("sidenav").style.width = "0";
-  document.getElementById("main").style.marginLeft = "0";
 }
+
 function oversikt(){
   document.getElementById("Introduksjon").style.display = "none";
   document.getElementById("Detaljer").style.display = "none";
@@ -30,6 +33,7 @@ function sammenligning(){
   document.getElementById("Detaljer").style.display = "none";
   document.getElementById("Sammenligning").style.display = "block";
 }
+
 
 function Befolkning(url){
   this.load = loader(url);
@@ -119,3 +123,25 @@ var utdanning_url =  "http://wildboy.uib.no/~tpe056/folk/85432.json";
 test(befolkning_url);
 test(sysselsatte_url);
 test(utdanning_url);
+
+function detaljerSearcher() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("detaljer_input");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("detaljer_table");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
