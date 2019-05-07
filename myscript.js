@@ -35,6 +35,7 @@ function Befolkning(url){
   this.load = loader(url);
   this.skjema = this.load;
 
+  // laster inn URLen.
   function loader(link){
     var xhr = new XMLHttpRequest();
     xhr.open("GET", link, false);
@@ -45,7 +46,6 @@ function Befolkning(url){
       return skjema;
     }
   }
-
   // returnerer en array med alle kommune navnene.
   this.getNames = function(){
     tmp = [];
@@ -62,22 +62,16 @@ function Befolkning(url){
     }
     return tmp;
   }
-  // Returnerer all info om et spesifikt kommunenummer
+  // Returnerer et objekt med info om en spesifikk kommune.
   this.getInfo = function (kommunenummer){
     for (kommune in this.skjema.elementer){
       if (this.skjema.elementer[kommune].kommunenummer == kommunenummer){
         return this.skjema.elementer[kommune];
       }
     }
-  };
+  }
+
 }
-
-
-var bef = new Befolkning("http://wildboy.uib.no/~tpe056/folk/104857.json");
-bef.load;
-bef.getNames();
-bef.getIDs();
-bef.getInfo("2030");
 
 // Henter ut de relevante IDene vi trenger.
 oversikt_table = document.getElementById("oversikt_table");
@@ -105,3 +99,23 @@ function addToOversikt(befolkning ){
     cell3.innerHTML = parseInt(menn) + parseInt(kvinner);
   }
 }
+
+
+function test(url){
+  var test_objekt = new Befolkning(url);
+  console.log("TEST: opprettet objekt med URL", url);
+  console.log("TEST: prøver å laste inn fil");
+  test_objekt.load;
+  console.log("TEST: prøver å hente ut alle navn i en array:", test_objekt.getNames());
+  console.log("TEST: prøver å hente ut alle kommunenummer i array:", test_objekt.getIDs());
+  console.log("TEST: prøver å hente ut info om kommunenummer 2030", test_objekt.getInfo("2030"));
+}
+
+
+// Tester forskjellige linker.
+var befolkning_url = "http://wildboy.uib.no/~tpe056/folk/104857.json";
+var sysselsatte_url = "http://wildboy.uib.no/~tpe056/folk/100145.json";
+var utdanning_url =  "http://wildboy.uib.no/~tpe056/folk/85432.json";
+test(befolkning_url);
+test(sysselsatte_url);
+test(utdanning_url);
