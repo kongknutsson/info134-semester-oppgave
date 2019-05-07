@@ -1,14 +1,11 @@
 function openNav(){
-  if (window.matchMedia("(max-width: 960px)").matches) {
-    document.getElementById('sidenav').style.width = "180px";
-  } else {
   document.getElementById("sidenav").style.width = "250px";
-  }
+  document.getElementById("main").style.marginLeft = "250px";
 }
 function closeNav(){
   document.getElementById("sidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
 }
-
 function oversikt(){
   document.getElementById("Introduksjon").style.display = "none";
   document.getElementById("Detaljer").style.display = "none";
@@ -35,37 +32,31 @@ function sammenligning(){
 }
 
 function Befolkning(url){
-  this.skjema = null;
+  this.load = loader(url);
+  this.skjema = this.load;
+  console.log(this.skjema);
 
-  console.log(this);
-
-  // Laster inn befolkning skjemaet, med URL til skjemaet.
-  this.load = function(){
+  function loader(link){
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", url);
-    xhr.onreadystatechange = function(){
-      if (xhr.readyState === 4 && xhr.status === 200){
-
-        // Gjør om skjemaet til en string, for så å gjøre det til et objekt.
-        // DETTE FORSVINNER UTENFOR SCOPET.
-        skjema = JSON.stringify(xhr.responseText);
-        skjema = JSON.parse(xhr.responseText);
-        addToOversikt(skjema);
-      }
-    }
-    // Trengs denne? Hva gjør dette egentlig?
+    xhr.open("GET", link, false);
     xhr.send();
+    if (xhr.readyState === 4 && xhr.status === 200){
+      var skjema = JSON.parse(xhr.responseText);
+      addToOversikt(skjema);
+      return skjema;
+    }
   }
 
   this.getNames = function(){
     this.skjema = "ok";
   };
   this.getIDS = function(){};
-  this.getInfo = function(komNr){};
+  this.getInfo = function (){};
 }
 
+
 var bef = new Befolkning("http://wildboy.uib.no/~tpe056/folk/104857.json");
-bef.load();
+bef.load;
 
 // Henter ut de relevante IDene vi trenger.
 oversikt_table = document.getElementById("oversikt_table");
