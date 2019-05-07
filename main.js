@@ -37,20 +37,15 @@ function Befolkning(url){
 
   function loader(link){
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", link);
-    xhr.onreadystatechange = function(){loader_request();}
-
-    function loader_request(){
-      console.log("state:", xhr.readyState);
-      console.log("status:", xhr.status);
-      if (xhr.readyState === 4 && xhr.status === 200){
-        var skjema = JSON.parse(xhr.responseText);
-        addToOversikt(skjema);
-        return skjema;
-      }
-    }
+    xhr.open("GET", link, false);
+    console.log(xhr.readyState, xhr.status);
     xhr.send();
-    return loader_request;
+    if (xhr.readyState === 4 && xhr.status === 200){
+      console.log("kom til state 4, status 200");
+      var skjema = JSON.parse(xhr.responseText);
+      addToOversikt(skjema);
+      return skjema;
+    }
   }
 
   this.getNames = function(){
@@ -60,8 +55,9 @@ function Befolkning(url){
   this.getInfo = function (){};
 }
 
+
 var bef = new Befolkning("http://wildboy.uib.no/~tpe056/folk/104857.json");
-bef.load();
+bef.load;
 
 // Henter ut de relevante IDene vi trenger.
 oversikt_table = document.getElementById("oversikt_table");
