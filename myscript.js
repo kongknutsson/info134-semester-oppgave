@@ -34,10 +34,11 @@ function sammenligning(){
   document.getElementById("Sammenligning").style.display = "block";
 }
 
-function Befolkning(url){
+function my_constructor(url){
   this.load = loader(url);
   this.skjema = this.load;
-  // laster inn URLen.
+  this.onload = null;
+
   function loader(link){
     var xhr = new XMLHttpRequest();
     xhr.open("GET", link, false);
@@ -47,7 +48,6 @@ function Befolkning(url){
       return skjema;
     }
   }
-  // returnerer en array med alle kommune navnene.
   this.getNames = function(){
     tmp = [];
     for (kommune in this.skjema.elementer){
@@ -55,7 +55,6 @@ function Befolkning(url){
     }
     return tmp;
   };
-  // Returnerer en array med alle kommunenummer
   this.getIDs = function(){
     tmp = [];
     for (kommune in this.skjema.elementer){
@@ -63,7 +62,6 @@ function Befolkning(url){
     }
     return tmp;
   }
-  // Returnerer et objekt med info om en spesifikk kommune.
   this.getInfo = function (kommunenummer){
     for (kommune in this.skjema.elementer){
       if (this.skjema.elementer[kommune].kommunenummer == kommunenummer){
@@ -74,16 +72,13 @@ function Befolkning(url){
 
 }
 
-// Henter ut de relevante IDene vi trenger.
 oversikt_table = document.getElementById("oversikt_table");
 oversikt_navn = document.getElementById("oversikt_navn");
 oversikt_nummer = document.getElementById("oversikt_nummer");
 oversikt_befolkning = document.getElementById("oversikt_befolkning");
-// Legger til data i oversikt, med et nedlastet JSON objekt som parameter.
 function addToOversikt(befolkning ){
   // bruker nøkkelverdiene til å hente ut objektene.
   for (var key of Object.keys(befolkning.elementer)) {
-    // Lager nye rader og rekker til infoen
     var row = oversikt_table.insertRow(1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
@@ -100,18 +95,6 @@ function addToOversikt(befolkning ){
     cell3.innerHTML = parseInt(menn) + parseInt(kvinner);
   }
 }
-
-
-function test(url){
-  var test_objekt = new Befolkning(url);
-  console.log("TEST: opprettet objekt med URL", url);
-  console.log("TEST: prøver å laste inn fil");
-  test_objekt.load;
-  console.log("TEST: prøver å hente ut alle navn i en array:", test_objekt.getNames());
-  console.log("TEST: prøver å hente ut alle kommunenummer i array:", test_objekt.getIDs());
-  console.log("TEST: prøver å hente ut info om kommunenummer 2030", test_objekt.getInfo("2030"));
-}
-
 function detaljerSearcher() {
   // Declare variables
   var input, filter, table, tr, td, i, txtValue;
@@ -134,10 +117,11 @@ function detaljerSearcher() {
   }
 }
 
+function test(url){
+  var test_objekt = new my_constructor(url);
+  test_objekt.load;
+}
 
-
-
-// Tester forskjellige linker.
 var befolkning_url = "http://wildboy.uib.no/~tpe056/folk/104857.json";
 var sysselsatte_url = "http://wildboy.uib.no/~tpe056/folk/100145.json";
 var utdanning_url =  "http://wildboy.uib.no/~tpe056/folk/85432.json";
