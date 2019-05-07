@@ -1,14 +1,11 @@
 function openNav(){
-  if (window.matchMedia("(max-width: 960px)").matches) {
-    document.getElementById('sidenav').style.width = "180px";
-  } else {
   document.getElementById("sidenav").style.width = "250px";
-  }
+  document.getElementById("main").style.marginLeft = "250px";
 }
 function closeNav(){
   document.getElementById("sidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
 }
-
 function oversikt(){
   document.getElementById("Introduksjon").style.display = "none";
   document.getElementById("Detaljer").style.display = "none";
@@ -37,7 +34,6 @@ function sammenligning(){
 function Befolkning(url){
   this.load = loader(url);
   this.skjema = this.load;
-  console.log(this.skjema);
 
   function loader(link){
     var xhr = new XMLHttpRequest();
@@ -50,16 +46,38 @@ function Befolkning(url){
     }
   }
 
+  // returnerer en array med alle kommune navnene.
   this.getNames = function(){
-    this.skjema = "ok";
+    tmp = [];
+    for (kommune in this.skjema.elementer){
+      tmp.push(kommune);
+    }
+    return tmp;
   };
-  this.getIDS = function(){};
-  this.getInfo = function (){};
+  // Returnerer en array med alle kommunenummer
+  this.getIDs = function(){
+    tmp = [];
+    for (kommune in this.skjema.elementer){
+      tmp.push(this.skjema.elementer[kommune].kommunenummer)
+    }
+    return tmp;
+  }
+  // Returnerer all info om et spesifikt kommunenummer
+  this.getInfo = function (kommunenummer){
+    for (kommune in this.skjema.elementer){
+      if (this.skjema.elementer[kommune].kommunenummer == kommunenummer){
+        return this.skjema.elementer[kommune];
+      }
+    }
+  };
 }
 
 
 var bef = new Befolkning("http://wildboy.uib.no/~tpe056/folk/104857.json");
 bef.load;
+bef.getNames();
+bef.getIDs();
+bef.getInfo("2030");
 
 // Henter ut de relevante IDene vi trenger.
 oversikt_table = document.getElementById("oversikt_table");
@@ -85,27 +103,5 @@ function addToOversikt(befolkning ){
     var menn = befolkning.elementer[key].Menn[2018];
     var kvinner = befolkning.elementer[key].Kvinner[2018];
     cell3.innerHTML = parseInt(menn) + parseInt(kvinner);
-  }
-}
-
-function detaljerSearcher() {
-  // Declare variables
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("detaljer_input");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("detaljer_table");
-  tr = table.getElementsByTagName("tr");
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[1];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
   }
 }
