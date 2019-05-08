@@ -104,11 +104,11 @@ span {
 }
 
 #bottom {
-  position: absolute;
+
   bottom: 2vh;
   text-align: center;
-  left: 50%;
-  transform: translate(-50%, 0);
+  margin-top: 32vh;
+ 
 }
 
 #detaljer_input{
