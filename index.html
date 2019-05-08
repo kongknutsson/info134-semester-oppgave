@@ -2,8 +2,11 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-    <title>Semesteroppgave</title>
+    <title>Semester oppgave</title>
     <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <script type="text/javascript" src="myscript.js">
+
+    </script>
   </head>
   <body>
     <div class="mySidenav" id="sidenav">
@@ -34,83 +37,165 @@
         <table id="oversikt_table" class="tables">
           <tr>
             <th class="info" id="oversikt_navn">Kommune</th>
-            <th class="info" id="oversikt_nummer">Kommunenummer</th>
+            <th class="info" id="oversikt_nummer">Kommune Nummer</th>
             <th class="info" id="oversikt_befolkning">Befolkning</th>
           </tr>
         </table>
       </div>
 
-      <div id="Detaljer">
+        <div id="Detaljer">
         <h1 id="titleD">Detaljer</h1>
-        <input type="text" placeholder="Skriv inn kommunenummer..." id="detaljer_input" onkeyup="detaljerSearcher()"></input>
+        <form>
+        <input type="search" id="detaljer_input" maxlength="4" placeholder="Finn kommunen">
+        <button id="detaljer_search"><span class="sr-only" onclick="detaljerSearcher()"><span>Søk</span></span></button>
+      </form>
+
+      <div id="tableHide">
+        <div id="detaljerHoved">
         <table id="detaljer_table" class="tables">
-          <tr>
-            <th class="info" id="detaljer_navn">Kommune</th>
-            <th class="info" id="detaljer_nummer">Kommunenummer</th>
-            <th class="info" id="detaljer_befolkning">Befolkning</th>
-            <th class="info" id="detaljer_sysselsetting">Sysselsetting</th>
-            <th class="info" id="detaljer_utdanning">Utdanning</th>
-          </tr>
+        <tr>
+        <th class="info" id="detaljer_navn">Kommunenavn</th>
+        <td class="output">output kommune</td>
+        </tr>
+        <tr>
+        <th class="info" id="detaljer_nummer">Kommune Nummer</th>
+        <td class="output">output kommunenr</td>
+        </tr>
+        <tr>
+        <th class="info">Menn</th>
+        <td class="output">output menn</td>
+        </tr>
+        <tr>
+        <th class="info">Kvinner</th>
+        <td class="output">output kvinner</td>
+        </tr>
+        <tr>
+        <th class="info">Menn i arbeid</th>
+        <td class="output">output menn i arbeid</td>
+        </tr>
+        <tr>
+        <th class="info">Kvinner i arbeid</th>
+        <td class="output">output kvinner i arbeid</td>
+        </tr>
+        <tr>
+        <th class="info">Begge kjønn</th>
+        <td class="output">output begge kjønn</td>
+        </tr>
         </table>
       </div>
 
-      <div id="Sammenligning">
-        <h1 id="title">Sammenligning</h1>
-        <input type="text" placeholder="Kommunenummer" id="sammenligning_input_1"></input>
-        <input type="text" placeholder="Kommunenummer" id="sammenligning_input_2"></input>
-        <table id="sammenligning_table_1_big" style="width:100%">
-          <tr>
-            <th class="info" id="sammenligning_navn_1">Kommune</th>
-            <th class="info" id="sammenligning_nummer_1">Kommunenummer</th>
-            <th class="info" id="menn_1">Menn</th>
-            <th class="info" id="kvinner_1">Kvinner</th>
-          </tr>
-          <p id="søkeKnapp"></p>
-          <button onclick="myFunction()">Søk</button>
-        </table>
-        <table id="sammenligning_table_2_big" style="width:100%">
-          <tr>
-            <th class="info" id="sammenligning_navn_2">Kommune</th>
-            <th class="info" id="sammenligning_nummer_2">Kommunenummer</th>
-            <th class="info" id="menn_2">Menn</th>
-            <th class="info" id="kvinner_2">Kvinner</th>
-          </tr>
-        </table>
-        <table id="sammenligning_table_1_small">
-          <tr>
-            <th class="info" id="sammenligning_navn_1">Kommune</th>
-          </tr>
-          <tr>
-            <th class="info" id="sammenligning_nummer_1">Kommunenummer</th>
-          </tr>
-          <tr>
-            <th class="info" id="menn_1">Menn</th>
-          </tr>
-          <tr>
-            <th class="info" id="kvinner_1">Kvinner</th>
-          </tr>
-        </table>
-        <table id="sammenligning_table_2_small">
-          <tr>
-            <th class="info" id="sammenligning_navn_2">Kommune</th>
-          </tr>
-          <tr>
-            <th class="info" id="sammenligning_nummer_2">Kommunenummer</th>
-          </tr>
-          <tr>
-            <th class="info" id="menn_2">Menn</th>
-          </tr>
-          <tr>
-            <th class="info" id="kvinner_2">Kvinner</th>
-          </tr>
+      <div id="detaljerMenn">
+        <h3>Menn</h3>
+        <table id = "fullførtUtdanningMenn" class="tables">
+        <tr>
+        <th class="info">Grunnskolenivå</th>
+        <td class="output">output</td>
+        </tr>
+        <tr>
+        <th class="info">VGS</th>
+        <td class="output">output</td>
+        </tr>
+        <tr>
+        <th class="info">Fagskolenivå</th>
+        <td class="output">output</td>
+        </tr>
+        <tr>
+        <th class="info">Universitet/høyskolenivå kort</th>
+        <td class="output">output</td>
+        </tr>
+        <tr>
+        <th class="info">Universitet/høyskolenivå lang</th>
+        <td class="output">output</td>
+        </tr>
+        <tr>
+        <th class="info">Uoppgitt/ingen utdanning</th>
+        <td class="output">output</td>
+        </tr>
         </table>
       </div>
+
+      <div id="detaljerKvinner">
+        <h3>Kvinner</h3>
+        <table id = "fullførtUtdanningKvinner" class="tables">
+        <tr>
+        <th class="info">Grunnskolenivå</th>
+        <td class="output">output</td>
+        </tr>
+        <tr>
+        <th class="info">VGS</th>
+        <td class="output">output</td>
+        </tr>
+        <tr>
+        <th class="info">Fagskolenivå</th>
+        <td class="output">output</td>
+        </tr>
+        <tr>
+        <th class="info">Universitet/høyskolenivå kort</th>
+        <td class="output">output</td>
+        </tr>
+        <tr>
+        <th class="info">Universitet/høyskolenivå lang</th>
+        <td class="output">output</td>
+        </tr>
+        <tr>
+        <th class="info">Uoppgitt/ingen utdanning</th>
+        <td class="output">output</td>
+        </tr>
+        </table>
+      </div>
+      </div>
+    </div>
+
+    <div id="Sammenligning">
+    <h1 id="titleS">Sammenligning</h1>
+    <h1 id="title">Sammenligning</h1>
+    <input type="text" placeholder="Kommunenummer" id="sammenligning_input_1"></input>
+    <input type="text" placeholder="Kommunenummer" id="sammenligning_input_2"></input>
+    <table id="sammenligning_table_1_big" style="width:100%">
+      <tr>
+        <th class="info" id="sammenligning_navn_1">Kommune</th>
+        <th class="info" id="sammenligning_nummer_1">Kommunenummer</th>
+        <th class="info" id="menn_1">Menn</th>
+        <th class="info" id="kvinner_1">Kvinner</th>
+      </tr>
+    </table>
+    <table id="sammenligning_table_2_big" style="width:100%">
+      <tr>
+        <th class="info" id="sammenligning_navn_2">Kommune</th>
+        <th class="info" id="sammenligning_nummer_2">Kommunenummer</th>
+        <th class="info" id="menn_2">Menn</th>
+        <th class="info" id="kvinner_2">Kvinner</th>
+      </tr>
+    </table>
+    <table id="sammenligning_table_1_small">
+      <tr>
+        <th class="info" id="sammenligning_navn_1">Kommune</th>
+      </tr>
+      <tr>
+        <th class="info" id="sammenligning_nummer_1">Kommunenummer</th>
+      </tr>
+      <tr>
+        <th class="info" id="menn_1">Menn</th>
+      </tr>
+      <tr>
+        <th class="info" id="kvinner_1">Kvinner</th>
+      </tr>
+    </table>
+    <table id="sammenligning_table_2_small">
+      <tr>
+        <th class="info" id="sammenligning_navn_2">Kommune</th>
+      </tr>
+      <tr>
+        <th class="info" id="sammenligning_nummer_2">Kommunenummer</th>
+      </tr>
+      <tr>
+        <th class="info" id="menn_2">Menn</th>
+      </tr>
+      <tr>
+        <th class="info" id="kvinner_2">Kvinner</th>
+      </tr>
+    </table>
   </div>
-
-  <!-- <div id="bottom">
-    Dette er en besvarelse til en universitets oppgave. Faget er INFO134, ved
-    Det Samfunnsvitenskapelige Fakultet på UiB. Nettsiden kan inneholde feil.
-  </div> -->
 
   <script src="myscript.js"></script>
   </body>
