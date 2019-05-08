@@ -112,6 +112,26 @@ function addToOversikt(skjema){
   }
 }
 
+function addToSammenligning(befolkning, sysselsatte, input_1, input_2){
+  for(var i = 0; i < befolkning.getIDs().length; i++){
+    console.log("ok")
+    if(input_1 in befolkning.getIDs){
+      bef_info = befolkning.getInfo(input_1);
+      document.getElementById().innerHTML = befolkning.getNameFrom(input_1);
+      document.getElementById().innerHTML = input_1;
+      sys_info = sysselsatte.getInfo(input_1);
+      document.getElementById().innerHTML = sysselsatte;
+    }
+    if (input_2 in befolkning.getIDs){
+      bef_info = befolkning.getInfo(input_2);
+      document.getElementById().innerHTML = befolkning.getNameFrom(input_2);
+      document.getElementById().innerHTML = input_2;
+      sys_info = sysselsatte.getInfo(input_1);
+      document.getElementById().innerHTML = sysselsatte
+    }
+  }
+}
+
 function detaljerSearcher() {
   // Declare variables
   var input, filter, table, tr, td, i, txtValue;
@@ -134,6 +154,31 @@ function detaljerSearcher() {
   }
 }
 
+function sammenligningSearcher(){
+  //Declare variables
+  var input_1, input_2, filter_1, filter_2, table_1, table_2, tr, td, i, txtValue;
+  input_1 = document.getElementById("sammenligning_input_1");
+  input_2 = document.getElementById("sammenligning_input_2")
+  filter_1 = input_1.value.toUpperCase();
+  filter_2 = input_2.value.toUpperCase();
+  table_1 = document.getElementById("sammenligning_table_1_big", "sammenligning_table_1_small")
+  table_2 = document.getElementById("sammenligning_table_2_big", "sammenligning_table_2_small")
+  tr = table.getElementsByTagName("tr")
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for(i = 0; i < tr.length; i++){
+    td = tr[i].getElementsByTagName("td")[1];
+    if(td){
+      txtValue = td.textContent || td.innerText;
+      if(txtValue.toUpperCase().indexOf(filter_1 || filter_2) > -1){
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
 function main(){
   var befolkning_url = "http://wildboy.uib.no/~tpe056/folk/104857.json";
   var sysselsatte_url = "http://wildboy.uib.no/~tpe056/folk/100145.json";
@@ -148,5 +193,6 @@ function main(){
 
   addToOversikt(befolkning.skjema);
   addToDetaljer(befolkning, sysselsatte, utdanning, "0101")
+  addToSammenligning(befolkning, sysselsatte)
 }
 main();
