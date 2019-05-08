@@ -1,6 +1,7 @@
 body {
   background-color: #dbe2ef;
   font-family: "Lato", sans-serif;
+  margin: 0;
 }
 
 h1 {
@@ -22,73 +23,19 @@ h1 {
 }
 
 #Oversikt {
-  text-align: center;
   display: none;
 }
 
 #Detaljer {
-  text-align: center;
   display: none;
-}
-
-#detaljer_input {
-  width: 10vw;
-  height: 5vh;
-  text-align: center;
-  font-size: 2vh;
-  margin-bottom: 5vh;
-}
-
-table.tables{
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.tables {
-  border: 1px solid black;
-}
-
-.info {
-  border: 1px solid black;
-  padding: 10px;
-  padding-right: 50px;
 }
 
 #Sammenligning{
-  text-align: center;
   display: none;
 }
 
-#sammenligning_input_1{
-  text-align: center;
-}
-
-#sammenligning_input_2{
-  text-align: center;
-}
-
-#sammenligning_table_1_big{
-  border: 1px solid black;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 5vh;
-  margin-bottom: 5vh;
-}
-
-#sammenligning_table_2_big{
-  border: 1px solid black;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media only screen and (min-width: 961px){
-  #sammenligning_table_1_small{
-    display: none;
-  }
-
-  #sammenligning_table_2_small{
-    display: none;
-  }
+#tableHide{
+  display: none;
 }
 
 /*links*/
@@ -108,6 +55,12 @@ span {
     background-color: inherit;
     cursor:pointer;
     font-size: 3vh;
+}
+
+button{
+  font-size: 18px;
+  background-color: inherit;
+  border: 1px solid black;
 }
 
 /**navigator**/
@@ -159,8 +112,98 @@ span {
   transform: translate(-50%, 0);
 }
 
+#detaljer_input{
+  width: 60%;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid black;
+  text-align: center;
+}
+#detaljer_search{
+  height: auto;
+
+}
+
+table.tables{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tables {
+  border: 1px solid black;
+  width: 100%;
+  font-size: 16px;
+}
+
+.tables th, .tables td{
+  text-align: left;
+}
+
+.info, .output {
+  width: auto;
+  border: 1px solid black;
+  padding: 5px;
+  border-right: none;
+  border-left: none;
+}
+
+td, th{
+  font-size: 16px;
+  padding: 5px;
+}
+
+#sammenligning_input_1{
+  text-align: center;
+}
+
+#sammenligning_input_2{
+  text-align: center;
+}
+
+#sammenligning_table_1_big{
+  border: 1px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
+#sammenligning_table_2_big{
+  border: 1px solid black;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#sammenligning_table_1_small{
+  border: 1px solid black;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
+#sammenligning_table_2_small{
+  border: 1px solid black;
+}
+
+#sammenligning_table_1_big{
+  display: none;
+}
+
+#sammenligning_table_2_big{
+  display: none;
+}
+
+@media only screen and (min-width: 961px){
+  #sammenligning_table_1_small{
+    display: none;
+  }
+
+  #sammenligning_table_2_small{
+    display: none;
+  }
+}
+
 /*mobil og tablet mode*/
 @media only screen and (max-width: 960px) {
+
   .mySidenav{
     font-size: 2vh;
     padding-top: 40px;
@@ -176,21 +219,16 @@ span {
     font-size: 16px;
   }
 
-  #sammenligning_table_1_small{
+  #detaljer_table{
+    width: 100%;
+    font-size: 12px;
+  }
+
+  #detaljer_input{
+    width: 100%;
+    font-size: 10px;
+    padding: 12px 20px 12px 40px;
     border: 1px solid black;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
-  }
-
-  #sammenligning_table_2_small{
-    border: 1px solid black;
-  }
-
-  #sammenligning_table_1_big{
-    display: none;
-  }
-
-  #sammenligning_table_2_big{
-    display: none;
+    margin: 20px;
   }
 }
