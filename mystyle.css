@@ -32,16 +32,11 @@ h1 {
 
 #Sammenligning{
   display: none;
+  text-align: center;
 }
 
 #tableHide{
-  display: none;
-}
-
-#bunntekst {
-    display: block;
-    margin-top: 32vh;
-    text-align: center;
+  display: block;
 }
 
 /*links*/
@@ -63,10 +58,8 @@ span {
     font-size: 3vh;
 }
 
-button{
-  font-size: 18px;
-  background-color: inherit;
-  border: 1px solid black;
+#searchbar{
+  text-align: center;
 }
 
 /**navigator**/
@@ -126,7 +119,10 @@ button{
 }
 #detaljer_search{
   height: auto;
+}
 
+#tableHide{
+  display: none;
 }
 
 table.tables{
