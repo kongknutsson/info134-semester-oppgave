@@ -69,16 +69,15 @@ function my_constructor(url){
       }
     }
   }
-
 }
 
 oversikt_table = document.getElementById("oversikt_table");
 oversikt_navn = document.getElementById("oversikt_navn");
 oversikt_nummer = document.getElementById("oversikt_nummer");
 oversikt_befolkning = document.getElementById("oversikt_befolkning");
-function addToOversikt(befolkning ){
+function addToOversikt(skjema){
   // bruker nøkkelverdiene til å hente ut objektene.
-  for (var key of Object.keys(befolkning.elementer)) {
+  for (var key of Object.keys(skjema.elementer)) {
     var row = oversikt_table.insertRow(1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
@@ -88,10 +87,10 @@ function addToOversikt(befolkning ){
     cell3.classList.add("info");
     // legger inn infoen i rekkene. key er nøkkelverdi, altså kommunenavn.
     cell1.innerHTML = key;
-    cell2.innerHTML = befolkning.elementer[key].kommunenummer;
+    cell2.innerHTML = skjema.elementer[key].kommunenummer;
     // Bruker det seneste året, altså 2018.
-    var menn = befolkning.elementer[key].Menn[2018];
-    var kvinner = befolkning.elementer[key].Kvinner[2018];
+    var menn = skjema.elementer[key].Menn[2018];
+    var kvinner = skjema.elementer[key].Kvinner[2018];
     cell3.innerHTML = parseInt(menn) + parseInt(kvinner);
   }
 }
@@ -117,19 +116,12 @@ function detaljerSearcher() {
   }
 }
 
-function test(url){
-  var test_objekt = new my_constructor(url);
-  test_objekt.load;
+function main(){
+  var befolkning = new my_constructor("http://wildboy.uib.no/~tpe056/folk/104857.json");
+  var sysselsatte = new my_constructor("http://wildboy.uib.no/~tpe056/folk/100145.json");
+  var utdanning = new my_constructor("http://wildboy.uib.no/~tpe056/folk/85432.json");
+  befolkning.load;
+  sysselsatte.load;
+  utdanning.load;
 }
-
-var befolkning_url = "http://wildboy.uib.no/~tpe056/folk/104857.json";
-var sysselsatte_url = "http://wildboy.uib.no/~tpe056/folk/100145.json";
-var utdanning_url =  "http://wildboy.uib.no/~tpe056/folk/85432.json";
-
-console.log(" -- -- BEFOLKNING:");
-test(befolkning_url);
-console.log(" -- -- SYSSELSATTE:");
-test(sysselsatte_url);
-console.log(" -- -- UTDANNING:");
-test(utdanning_url);
 
