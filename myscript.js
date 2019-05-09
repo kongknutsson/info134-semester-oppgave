@@ -163,47 +163,103 @@ function addToDetaljer(befolkning, sysselsatte, utdanning){
   document.getElementById("tableHide").style.display = "block";
 }
 
-function addToSammenligning(befolkning, sysselsatte, input_1, input_2){
-  for(var i = 0; i < befolkning.getIDs().length; i++){
-    console.log("ok")
-    if(input_1 in befolkning.getIDs){
-      bef_info = befolkning.getInfo(input_1);
-      document.getElementById().innerHTML = befolkning.getNameFrom(input_1);
-      document.getElementById().innerHTML = input_1;
-      sys_info = sysselsatte.getInfo(input_1);
-      document.getElementById().innerHTML = sysselsatte;
-    }
-    if (input_2 in befolkning.getIDs){
-      bef_info = befolkning.getInfo(input_2);
-      document.getElementById().innerHTML = befolkning.getNameFrom(input_2);
-      document.getElementById().innerHTML = input_2;
-      sys_info = sysselsatte.getInfo(input_1);
-      document.getElementById().innerHTML = sysselsatte
-    }
-  }
+function addToTest_2(){
+  addToSammenligning_1(befolkning, sysselsatte)
+  addToSammenligning_2(befolkning, sysselsatte)
 }
 
-function sammenligningSearcher(){
-  //Declare variables
-  var input_1, input_2, filter_1, filter_2, table_1, table_2, tr, td, i, txtValue;
-  input_1 = document.getElementById("sammenligning_input_1");
-  input_2 = document.getElementById("sammenligning_input_2")
-  filter_1 = input_1.value.toUpperCase();
-  filter_2 = input_2.value.toUpperCase();
-  table_1 = document.getElementById("sammenligning_table_1_big", "sammenligning_table_1_small")
-  table_2 = document.getElementById("sammenligning_table_2_big", "sammenligning_table_2_small")
-  tr = table.getElementsByTagName("tr")
+function addToSammenligning_1(befolkning, sysselsatte){
+  var input_1 = document.getElementById("sammenligning_input_1").value;
+  submitOK = "true";
 
-  // Loop through all table rows, and hide those who don't match the search query
-  for(i = 0; i < tr.length; i++){
-    td = tr[i].getElementsByTagName("td")[1];
-    if(td){
-      txtValue = td.textContent || td.innerText;
-      if(txtValue.toUpperCase().indexOf(filter_1 || filter_2) > -1){
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
+
+  bef_info = befolkning.getInfo(input_1);
+  if (typeof bef_info == "undefined"){
+    document.getElementById("table_sammenligning_hide").style.display = "none";
+    return;
   }
+
+  document.getElementById("output_kommunenavn_1").innerHTML = befolkning.getNameFrom(input_1);
+  document.getElementById("output_kommunenr_1").innerHTML = input_1;
+
+  sys_info = sysselsatte.getInfo(input_1);
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_1_2018").innerHTML = "2018: " + sys_info.Menn[2018];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_1_2017").innerHTML = "2017: " + sys_info.Menn[2017];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_1_2016").innerHTML = "2016: " + sys_info.Menn[2016];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_1_2015").innerHTML = "2015: " + sys_info.Menn[2015];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_1_2014").innerHTML = "2014: " + sys_info.Menn[2014];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_1_2013").innerHTML = "2013: " + sys_info.Menn[2013];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_1_2012").innerHTML = "2012: " + sys_info.Menn[2012];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_1_2011").innerHTML = "2011: " + sys_info.Menn[2011];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_1_2010").innerHTML = "2010: " + sys_info.Menn[2010];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_1_2009").innerHTML = "2009: " + sys_info.Menn[2009];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_1_2008").innerHTML = "2008: " + sys_info.Menn[2008];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_1_2007").innerHTML = "2007: " + sys_info.Menn[2007];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_1_2006").innerHTML = "2006: " + sys_info.Menn[2006];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_1_2005").innerHTML = "2005: " + sys_info.Menn[2005];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_1_2018").innerHTML = "2018: " + sys_info.Kvinner[2018];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_1_2017").innerHTML = "2017: " + sys_info.Kvinner[2017];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_1_2016").innerHTML = "2016: " + sys_info.Kvinner[2016];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_1_2015").innerHTML = "2015: " + sys_info.Kvinner[2015];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_1_2014").innerHTML = "2014: " + sys_info.Kvinner[2014];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_1_2013").innerHTML = "2013: " + sys_info.Kvinner[2013];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_1_2012").innerHTML = "2012: " + sys_info.Kvinner[2012];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_1_2011").innerHTML = "2011: " + sys_info.Kvinner[2011];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_1_2010").innerHTML = "2010: " + sys_info.Kvinner[2010];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_1_2009").innerHTML = "2009: " + sys_info.Kvinner[2009];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_1_2008").innerHTML = "2008: " + sys_info.Kvinner[2008];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_1_2007").innerHTML = "2007: " + sys_info.Kvinner[2007];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_1_2006").innerHTML = "2006: " + sys_info.Kvinner[2006];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_1_2005").innerHTML = "2005: " + sys_info.Kvinner[2005];
+
+
+
+  document.getElementById("table_sammenligning_hide").style.display = "block";
+}
+
+function addToSammenligning_2(befolkning, sysselsatte){
+  var input_2 = document.getElementById("sammenligning_input_2").value;
+  submitOK = "true";
+
+
+  bef_info = befolkning.getInfo(input_2);
+  if (typeof bef_info == "undefined"){
+    document.getElementById("table_sammenligning_hide").style.display = "none";
+    return;
+  }
+
+  document.getElementById("output_kommunenavn_2").innerHTML = befolkning.getNameFrom(input_2);
+  document.getElementById("output_kommunenr_2").innerHTML = input_2;
+
+  sys_info = sysselsatte.getInfo(input_2);
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2018").innerHTML = "2018: " + sys_info.Menn[2018];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2017").innerHTML = "2017: " + sys_info.Menn[2017];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2016").innerHTML = "2016: " + sys_info.Menn[2016];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2015").innerHTML = "2015: " + sys_info.Menn[2015];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2014").innerHTML = "2014: " + sys_info.Menn[2014];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2013").innerHTML = "2013: " + sys_info.Menn[2013];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2012").innerHTML = "2012: " + sys_info.Menn[2012];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2011").innerHTML = "2011: " + sys_info.Menn[2011];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2010").innerHTML = "2010: " + sys_info.Menn[2010];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2009").innerHTML = "2009: " + sys_info.Menn[2009];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2008").innerHTML = "2008: " + sys_info.Menn[2008];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2007").innerHTML = "2007: " + sys_info.Menn[2007];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2006").innerHTML = "2006: " + sys_info.Menn[2006];
+  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2005").innerHTML = "2005: " + sys_info.Menn[2005];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2018").innerHTML = "2018: " + sys_info.Kvinner[2018];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2017").innerHTML = "2017: " + sys_info.Kvinner[2017];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2016").innerHTML = "2016: " + sys_info.Kvinner[2016];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2015").innerHTML = "2015: " + sys_info.Kvinner[2015];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2014").innerHTML = "2014: " + sys_info.Kvinner[2014];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2013").innerHTML = "2013: " + sys_info.Kvinner[2013];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2012").innerHTML = "2012: " + sys_info.Kvinner[2012];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2011").innerHTML = "2011: " + sys_info.Kvinner[2011];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2010").innerHTML = "2010: " + sys_info.Kvinner[2010];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2009").innerHTML = "2009: " + sys_info.Kvinner[2009];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2008").innerHTML = "2008: " + sys_info.Kvinner[2008];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2007").innerHTML = "2007: " + sys_info.Kvinner[2007];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2006").innerHTML = "2006: " + sys_info.Kvinner[2006];
+  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2005").innerHTML = "2005: " + sys_info.Kvinner[2005];
+
+  document.getElementById("table_sammenligning_hide").style.display = "block";
 }

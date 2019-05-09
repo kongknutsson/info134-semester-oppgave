@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-    <title>Semesteroppgave</title>
+    <title>Semester oppgave</title>
     <link rel="stylesheet" type="text/css" href="mystyle.css">
 
     </script>
@@ -27,7 +27,7 @@
           <a href="http://data.ssb.no/api/v0/dataset/100145?lang=no">
           Sysselsatte pr 4.kv etter kjønn og alder</a><br>
           <a href="http://data.ssb.no/api/v0/dataset/85432?lang=no">
-            Utdanningsnivå etter kjønn</a><br>
+            Utdanningsnivå</a><br>
             OBS! Dataene kan inneholde feil</p>
       </div>
 
@@ -36,7 +36,7 @@
         <table id="oversikt_table" class="tables">
           <tr>
             <th class="info" id="oversikt_navn">Kommune</th>
-            <th class="info" id="oversikt_nummer">Kommunenummer</th>
+            <th class="info" id="oversikt_nummer">Kommune Nummer</th>
             <th class="info" id="oversikt_befolkning">Befolkning</th>
           </tr>
         </table>
@@ -148,57 +148,182 @@
   <div id="Sammenligning">
     <h1 id="title">Sammenligning</h1>
     <br><p style="font-size:16px;">Skriv inn to kommunenummere for å sammenligne kommuner:</p>
-    <form id=searchbarSammenligning onsubmit="">
-      <input type="text" maxlength="4" placeholder="Kommunenummer" id="sammenligning_input_1"></input>
-      <input type="text" maxlength="4" placeholder="Kommunenummer" id="sammenligning_input_2"></input>
+    <form id=searchbarSammenligning onsubmit="addToTest_2()">
+      <input type="text" maxlength="4" placeholder="Kommunenummer" id="sammenligning_input_1"><br>
+      <input type="text" maxlength="4" placeholder="Kommunenummer" id="sammenligning_input_2"><br>
       <input type="submit" id="searchbarButton" value="Søk">
     </form>
-    <table id="sammenligning_table_1_big" style="width:100%">
-      <tr>
-        <th class="info" id="sammenligning_navn_1">Kommune</th>
-        <th class="info" id="sammenligning_nummer_1">Kommunenummer</th>
-        <th class="info" id="menn_1">Menn</th>
-        <th class="info" id="kvinner_1">Kvinner</th>
-      </tr>
-    </table>
-    <table id="sammenligning_table_2_big" style="width:100%">
-      <tr>
-        <th class="info" id="sammenligning_navn_2">Kommune</th>
-        <th class="info" id="sammenligning_nummer_2">Kommunenummer</th>
-        <th class="info" id="menn_2">Menn</th>
-        <th class="info" id="kvinner_2">Kvinner</th>
-      </tr>
-    </table>
-    <table id="sammenligning_table_1_small">
-      <tr>
-        <th class="info" id="sammenligning_navn_1">Kommune</th>
-      </tr>
-      <tr>
-        <th class="info" id="sammenligning_nummer_1">Kommunenummer</th>
-      </tr>
-      <tr>
-        <th class="info" id="menn_1">Menn</th>
-      </tr>
-      <tr>
-        <th class="info" id="kvinner_1">Kvinner</th>
-      </tr>
-    </table>
-    <table id="sammenligning_table_2_small">
-      <tr>
-        <th class="info" id="sammenligning_navn_2">Kommune</th>
-      </tr>
-      <tr>
-        <th class="info" id="sammenligning_nummer_2">Kommunenummer</th>
-      </tr>
-      <tr>
-        <th class="info" id="menn_2">Menn</th>
-      </tr>
-      <tr>
-        <th class="info" id="kvinner_2">Kvinner</th>
-      </tr>
-    </table>
-  </div>
-  <div id="bottom"> Dette er en oppgavebesvarelse i emnet INFO134 ved Universitetet i Bergen
+
+    <div id="table_sammenligning_hide">
+        <table id="sammenligning_table_1_big" style="width:100%">
+        <tr>
+          <th class="info">Kommune</th>
+          <td class="output" id="output_kommunenavn_1"></td>
+        </tr>
+        <tr>
+          <th class="info">Kommunenummer</th>
+          <td class="output" id="output_kommunenr_1"></td>
+        </tr>
+        <tr>
+          <th class="info">Menn</th>
+          <td class="output" id="output_menn_arbeid_1_2018"></td>
+          <td class="output" id="output_menn_arbeid_1_2017"></td>
+          <td class="output" id="output_menn_arbeid_1_2016"></td>
+          <td class="output" id="output_menn_arbeid_1_2015"></td>
+          <td class="output" id="output_menn_arbeid_1_2014"></td>
+          <td class="output" id="output_menn_arbeid_1_2013"></td>
+          <td class="output" id="output_menn_arbeid_1_2012"></td>
+          <td class="output" id="output_menn_arbeid_1_2011"></td>
+          <td class="output" id="output_menn_arbeid_1_2010"></td>
+          <td class="output" id="output_menn_arbeid_1_2009"></td>
+          <td class="output" id="output_menn_arbeid_1_2008"></td>
+          <td class="output" id="output_menn_arbeid_1_2007"></td>
+          <td class="output" id="output_menn_arbeid_1_2006"></td>
+          <td class="output" id="output_menn_arbeid_1_2005"></td>
+        </tr>
+        <tr>
+          <th class="info">Kvinner</th>
+          <td class="output" id="output_kvinner_arbeid_1_2018"></td>
+          <td class="output" id="output_kvinner_arbeid_1_2017"></td>
+          <td class="output" id="output_kvinner_arbeid_1_2016"></td>
+          <td class="output" id="output_kvinner_arbeid_1_2015"></td>
+          <td class="output" id="output_kvinner_arbeid_1_2014"></td>
+          <td class="output" id="output_kvinner_arbeid_1_2013"></td>
+          <td class="output" id="output_kvinner_arbeid_1_2012"></td>
+          <td class="output" id="output_kvinner_arbeid_1_2011"></td>
+          <td class="output" id="output_kvinner_arbeid_1_2010"></td>
+          <td class="output" id="output_kvinner_arbeid_1_2009"></td>
+          <td class="output" id="output_kvinner_arbeid_1_2008"></td>
+          <td class="output" id="output_kvinner_arbeid_1_2007"></td>
+          <td class="output" id="output_kvinner_arbeid_1_2006"></td>
+          <td class="output" id="output_kvinner_arbeid_1_2005"></td>
+        </tr>
+      </table>
+
+      <table id="sammenligning_table_2_big" style="width:100%">
+        <tr>
+          <th class="info">Kommune</th>
+          <td class="output" id="output_kommunenavn_2"></td>
+        </tr>
+        <tr>
+          <th class="info">Kommunenummer</th>
+          <td class="output" id="output_kommunenr_2"></td>
+        </tr>
+        <tr>
+          <th class="info">Menn</th>
+          <td class="output" id="output_menn_arbeid_2_2018"></td>
+          <td class="output" id="output_menn_arbeid_2_2017"></td>
+          <td class="output" id="output_menn_arbeid_2_2016"></td>
+          <td class="output" id="output_menn_arbeid_2_2015"></td>
+          <td class="output" id="output_menn_arbeid_2_2014"></td>
+          <td class="output" id="output_menn_arbeid_2_2013"></td>
+          <td class="output" id="output_menn_arbeid_2_2012"></td>
+          <td class="output" id="output_menn_arbeid_2_2011"></td>
+          <td class="output" id="output_menn_arbeid_2_2010"></td>
+          <td class="output" id="output_menn_arbeid_2_2009"></td>
+          <td class="output" id="output_menn_arbeid_2_2008"></td>
+          <td class="output" id="output_menn_arbeid_2_2007"></td>
+          <td class="output" id="output_menn_arbeid_2_2006"></td>
+          <td class="output" id="output_menn_arbeid_2_2005"></td>
+        </tr>
+        <tr>
+          <th class="info">Kvinner</th>
+          <td class="output" id="output_kvinner_arbeid_2_2018"></td>
+          <td class="output" id="output_kvinner_arbeid_2_2017"></td>
+          <td class="output" id="output_kvinner_arbeid_2_2016"></td>
+          <td class="output" id="output_kvinner_arbeid_2_2015"></td>
+          <td class="output" id="output_kvinner_arbeid_2_2014"></td>
+          <td class="output" id="output_kvinner_arbeid_2_2013"></td>
+          <td class="output" id="output_kvinner_arbeid_2_2012"></td>
+          <td class="output" id="output_kvinner_arbeid_2_2011"></td>
+          <td class="output" id="output_kvinner_arbeid_2_2010"></td>
+          <td class="output" id="output_kvinner_arbeid_2_2009"></td>
+          <td class="output" id="output_kvinner_arbeid_2_2008"></td>
+          <td class="output" id="output_kvinner_arbeid_2_2007"></td>
+          <td class="output" id="output_kvinner_arbeid_2_2006"></td>
+          <td class="output" id="output_kvinner_arbeid_2_2005"></td>
+        </tr>
+      </table>
+
+      <table id="sammenligning_table_1_small" style="width:100%">
+          <tr>
+            <th class="info" id="output_kommunenavn_1">Kommune</th>
+            <th class="info" id="output_kommunenr_1">Kommunenummer</th>
+            <th class="info">Menn
+              <td class="output" id="output_menn_arbeid_1_2018"></td>
+              <td class="output" id="output_menn_arbeid_1_2017"></td>
+              <td class="output" id="output_menn_arbeid_1_2016"></td>
+              <td class="output" id="output_menn_arbeid_1_2015"></td>
+              <td class="output" id="output_menn_arbeid_1_2014"></td>
+              <td class="output" id="output_menn_arbeid_1_2013"></td>
+              <td class="output" id="output_menn_arbeid_1_2012"></td>
+              <td class="output" id="output_menn_arbeid_1_2011"></td>
+              <td class="output" id="output_menn_arbeid_1_2010"></td>
+              <td class="output" id="output_menn_arbeid_1_2009"></td>
+              <td class="output" id="output_menn_arbeid_1_2008"></td>
+              <td class="output" id="output_menn_arbeid_1_2007"></td>
+              <td class="output" id="output_menn_arbeid_1_2006"></td>
+              <td class="output" id="output_menn_arbeid_1_2005"></td>
+            </th>
+            <th class="info">Kvinner
+              <tr class="output" id="output_kvinner_arbeid_1_2018"></tr>
+              <td class="output" id="output_kvinner_arbeid_1_2017"></td>
+              <td class="output" id="output_kvinner_arbeid_1_2016"></td>
+              <td class="output" id="output_kvinner_arbeid_1_2015"></td>
+              <td class="output" id="output_kvinner_arbeid_1_2014"></td>
+              <td class="output" id="output_kvinner_arbeid_1_2013"></td>
+              <td class="output" id="output_kvinner_arbeid_1_2012"></td>
+              <td class="output" id="output_kvinner_arbeid_1_2011"></td>
+              <td class="output" id="output_kvinner_arbeid_1_2010"></td>
+              <td class="output" id="output_kvinner_arbeid_1_2009"></td>
+              <td class="output" id="output_kvinner_arbeid_1_2008"></td>
+              <td class="output" id="output_kvinner_arbeid_1_2007"></td>
+              <td class="output" id="output_kvinner_arbeid_1_2006"></td>
+              <td class="output" id="output_kvinner_arbeid_1_2005"></td>
+            </th>
+          </tr>
+      </table>
+
+      <table id="sammenligning_table_2_small" style="width:100%">
+        <tr>
+          <th class="info" id="output_kommunenavn_2">Kommune</th>
+          <th class="info" id="output_kommunenr_2">Kommunenummer</th>
+          <th class="info">Menn
+            <td class="output" id="output_menn_arbeid_2_2018"></td>
+            <td class="output" id="output_menn_arbeid_2_2017"></td>
+            <td class="output" id="output_menn_arbeid_2_2016"></td>
+            <td class="output" id="output_menn_arbeid_2_2015"></td>
+            <td class="output" id="output_menn_arbeid_2_2014"></td>
+            <td class="output" id="output_menn_arbeid_2_2013"></td>
+            <td class="output" id="output_menn_arbeid_2_2012"></td>
+            <td class="output" id="output_menn_arbeid_2_2011"></td>
+            <td class="output" id="output_menn_arbeid_2_2010"></td>
+            <td class="output" id="output_menn_arbeid_2_2009"></td>
+            <td class="output" id="output_menn_arbeid_2_2008"></td>
+            <td class="output" id="output_menn_arbeid_2_2007"></td>
+            <td class="output" id="output_menn_arbeid_2_2006"></td>
+            <td class="output" id="output_menn_arbeid_2_2005"></td>
+
+          </th>
+          <th class="info">Kvinner
+            <tr class="output" id="output_kvinner_arbeid_2_2018"></tr>
+            <td class="output" id="output_kvinner_arbeid_2_2017"></td>
+            <td class="output" id="output_kvinner_arbeid_2_2016"></td>
+            <td class="output" id="output_kvinner_arbeid_2_2015"></td>
+            <td class="output" id="output_kvinner_arbeid_2_2014"></td>
+            <td class="output" id="output_kvinner_arbeid_2_2013"></td>
+            <td class="output" id="output_kvinner_arbeid_2_2012"></td>
+            <td class="output" id="output_kvinner_arbeid_2_2011"></td>
+            <td class="output" id="output_kvinner_arbeid_2_2010"></td>
+            <td class="output" id="output_kvinner_arbeid_2_2009"></td>
+            <td class="output" id="output_kvinner_arbeid_2_2008"></td>
+            <td class="output" id="output_kvinner_arbeid_2_2007"></td>
+            <td class="output" id="output_kvinner_arbeid_2_2006"></td>
+            <td class="output" id="output_kvinner_arbeid_2_2005"></td>
+          </th>
+        </tr>
+      </table>
+    </div>
   </div>
 
   <script src="myscript.js"></script>

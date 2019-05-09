@@ -104,11 +104,11 @@ span {
 }
 
 #bottom {
-
+  position: absolute;
   bottom: 2vh;
   text-align: center;
-  margin-top: 32vh;
- 
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 #detaljer_input{
@@ -153,6 +153,10 @@ td, th{
   padding: 5px;
 }
 
+#table_sammenligning_hide{
+  display: none;
+}
+
 #sammenligning_input_1{
   text-align: center;
 }
@@ -183,14 +187,6 @@ td, th{
 
 #sammenligning_table_2_small{
   border: 1px solid black;
-}
-
-#sammenligning_table_1_big{
-  display: none;
-}
-
-#sammenligning_table_2_big{
-  display: none;
 }
 
 @media only screen and (min-width: 961px){
@@ -232,5 +228,18 @@ td, th{
     padding: 12px 20px 12px 40px;
     border: 1px solid black;
     margin: 20px;
+  }
+
+  #sammenligning_table_1_big{
+    display: none;
+  }
+
+  #sammenligning_table_2_big{
+    display: none;
+  }
+
+  td.output{
+    font-size: 5px;
+    color: red;
   }
 }
