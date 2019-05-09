@@ -246,23 +246,33 @@ td, th{
     display: none;
   }
 
-  #small_table table{
+  #small_table_1 table, #small_table_2 table{
     width: 100%;
     border: 1px solid black;
+    margin-top: 5vh;
     margin-bottom: 5vh;
   }
 
-  #small_table th{
+  #small_table_1 th, #small_table_2 th{
     border: 1px solid black;
     border-right: none;
     border-left: none;
     font-size: 13px;
   }
 
-  #small_table td{
+  #small_table_1 td, #small_table_2 td{
     border: 1px solid black;
     border-right: none;
     border-left: none;
+    font-size: 16px;
+  }
+
+  #info_kommune_1{
+    font-size: 16px;
+    margin-top: 5vh;
+  }
+
+  #info_kommune_1{
     font-size: 16px;
   }
 }

@@ -199,27 +199,35 @@ function addToSammenligningSmall(befolkning, sysselsatte){
     return;
   }
 
+  var kommune_1 = document.getElementById("info_kommune_1");
+  var kommune_2 = document.getElementById("info_kommune_2");
+  kommune_1.innerHTML = befolkning.getNameFrom(input_1) + " " + "Nr." + input_1;
+  kommune_2.innerHTML = befolkning.getNameFrom(input_2) + " " + "Nr." + input_2
+
+
   sys_info_1 = sysselsatte.getInfo(input_1);
   sys_info_2 = sysselsatte.getInfo(input_2);
   //Oppretter table tagen som skal vises på sammenligning siden, samt oppretter table headings til tabellene
-  var data = document.getElementById("small_table");
-  var table_1 = "<table ><thead><tr><th>Kommune</th><th>Kommunenummer</th><th>Menn</th><th>Kvinner</th></tr></thead><tbody>";
-  var table_2 = "<table ><thead><tr><th>Kommune</th><th>Kommunenummer</th><th>Menn</th><th>Kvinner</th></tr></thead><tbody>";
+  var data_1 = document.getElementById("small_table_1");
+  var data_2 = document.getElementById("small_table_2");
+  var table_1 = "<table><thead><tr><th>Menn</th><th>Kvinner</th></tr></thead><tbody>";
+  var table_2 = "<table><thead><tr><th>Menn</th><th>Kvinner</th></tr></thead><tbody>";
   //Fyller inn data om kommunen inn i tabellen (Kommune, Kommunenr. og første data siste året ifra sysselsatte(2018) menn og kvinner)
-  table_1 += "<tr><td>" + befolkning.getNameFrom(input_1) + "</td><td>" + input_1 + "</td><td>" + "2018: " + sys_info_1.Menn[2018] + "</td><td>" + "2018: " + sys_info_1.Kvinner[2018] + "</td></tr>";
-  table_2 += "<tr><td>" + befolkning.getNameFrom(input_2) + "</td><td>" + input_2 + "</td><td>" + "2018: " + sys_info_2.Menn[2018] + "</td><td>" + "2018: " + sys_info_2.Kvinner[2018] + "</td></tr>";
+  //table_1 += "<tr><td>" + befolkning.getNameFrom(input_1) + "</td><td>" + input_1 + "</td><td>" + "2018: " + sys_info_1.Menn[2018] + "</td><td>" + "2018: " + sys_info_1.Kvinner[2018] + "</td></tr>";
+  //table_2 += "<tr><td>" + befolkning.getNameFrom(input_2) + "</td><td>" + input_2 + "</td><td>" + "2018: " + sys_info_2.Menn[2018] + "</td><td>" + "2018: " + sys_info_2.Kvinner[2018] + "</td></tr>";
   //Fyller inn resten av dataene om sysselsatte i kommunen i den første tabellen som skal brukes til å sammenligne
   for (var year_1 = 2017; year_1 > 2004; year_1--) {
-    table_1 += "<tr><td>" + "" +  "</td><td>" + "" + "</td><td>" + year_1 + ": " + sys_info_1.Menn[year_1] + "</td><td>" + year_1 + ": " + sys_info_1.Kvinner[year_1] + "</td></tr>";
+    table_1 += "<tr><td>" + year_1 + ": " + sys_info_1.Menn[year_1] + "</td><td>" + year_1 + ": " + sys_info_1.Kvinner[year_1] + "</td></tr>";
   }
   //Fyller inn resten av dataene om sysselsatte i kommunen i den andre tabellen som skal brukes til å sammenligne
   for (var year_2 = 2017; year_2 > 2004; year_2--) {
-    table_2 += "<tr><td>" + "" +  "</td><td>" + "" + "</td><td>" + year_2 + ": " + sys_info_2.Menn[year_2] + "</td><td>" + year_2 + ": " + sys_info_2.Kvinner[year_2] + "</td></tr>";
+    table_2 += "<tr><td>" + year_2 + ": " + sys_info_2.Menn[year_2] + "</td><td>" + year_2 + ": " + sys_info_2.Kvinner[year_2] + "</td></tr>";
   }
   //Avslutter table tagene og henter de ut og skriver de inn i på siden
   table_1 += "</tbody></table>";
   table_2 += "</tbody></table>";
-  data.innerHTML = table_1 + table_2;
+  data_1.innerHTML = table_1;
+  data_2.innerHTML = table_2;
 }
 
 var befolkning_url = "http://wildboy.uib.no/~tpe056/folk/104857.json";
