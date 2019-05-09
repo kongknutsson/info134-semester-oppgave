@@ -212,9 +212,6 @@ function addToSammenligningSmall(befolkning, sysselsatte){
   var data_2 = document.getElementById("small_table_2");
   var table_1 = "<table><thead><tr><th>Menn</th><th>Kvinner</th></tr></thead><tbody>";
   var table_2 = "<table><thead><tr><th>Menn</th><th>Kvinner</th></tr></thead><tbody>";
-  //Fyller inn data om kommunen inn i tabellen (Kommune, Kommunenr. og første data siste året ifra sysselsatte(2018) menn og kvinner)
-  //table_1 += "<tr><td>" + befolkning.getNameFrom(input_1) + "</td><td>" + input_1 + "</td><td>" + "2018: " + sys_info_1.Menn[2018] + "</td><td>" + "2018: " + sys_info_1.Kvinner[2018] + "</td></tr>";
-  //table_2 += "<tr><td>" + befolkning.getNameFrom(input_2) + "</td><td>" + input_2 + "</td><td>" + "2018: " + sys_info_2.Menn[2018] + "</td><td>" + "2018: " + sys_info_2.Kvinner[2018] + "</td></tr>";
   //Fyller inn resten av dataene om sysselsatte i kommunen i den første tabellen som skal brukes til å sammenligne
   for (var year_1 = 2017; year_1 > 2004; year_1--) {
     table_1 += "<tr><td>" + year_1 + ": " + sys_info_1.Menn[year_1] + "</td><td>" + year_1 + ": " + sys_info_1.Kvinner[year_1] + "</td></tr>";
