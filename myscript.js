@@ -86,8 +86,9 @@ function addToTest(){
   addToDetaljer(befolkning, sysselsatte, utdanning)
 }
 function addToTest_2(){
-  addToSammenligning(befolkning, sysselsatte, 1)
-  addToSammenligning(befolkning, sysselsatte, 2)
+  addToSammenligningBig(befolkning, sysselsatte, 1)
+  addToSammenligningBig(befolkning, sysselsatte, 2)
+  addToSammenligningSmall(befolkning, sysselsatte)
 }
 
 function addToDetaljer(befolkning, sysselsatte, utdanning){
@@ -147,7 +148,7 @@ function addToOversikt(skjema){
   }
 }
 
-function addToSammenligning(befolkning, sysselsatte, identifier){
+function addToSammenligningBig(befolkning, sysselsatte, identifier){
   var input = document.getElementById("sammenligning_input_" + identifier).value;
   bef_info = befolkning.getInfo(input);
   if (typeof bef_info == "undefined"){
@@ -163,12 +164,9 @@ function addToSammenligning(befolkning, sysselsatte, identifier){
     year = year.toString();
     var current_id = "output_menn_arbeid_" + identifier +  "_" + year;
     document.getElementById(current_id).innerHTML = sys_info.Menn[year];
-    var current_id_2 = "small_output_menn_arbeid_" + identifier +  "_" + year;
-    document.getElementById(current_id_2).innerHTML = sys_info.Menn[year]
     // Om tallet er 0, altså ingen data, så skriver den heller n/a istedenfor tallet.
     if (sys_info.Menn[year] == 0) {
       document.getElementById(current_id).innerHTML = "n/a";
-      document.getElementById(current_id_2).innerHTML = "n/a";
     }
   }
 
@@ -176,16 +174,51 @@ function addToSammenligning(befolkning, sysselsatte, identifier){
     year = year.toString();
     var current_id = "output_kvinner_arbeid_" + identifier +  "_" + year;
     document.getElementById(current_id).innerHTML = sys_info.Kvinner[year];
-    var current_id_2 = "small_output_kvinner_arbeid_" + identifier +  "_" + year;
-    document.getElementById(current_id_2).innerHTML = sys_info.Kvinner[year]
     // Om tallet er 0, altså ingen data, så skriver den heller n/a istedenfor tallet.
     if (sys_info.Kvinner[year] == 0) {
       document.getElementById(current_id).innerHTML = "n/a";
-      document.getElementById(current_id_2).innerHTML = "n/a";
     }
   }
-  
+
   document.getElementById("table_sammenligning_hide").style.display = "block";
+}
+
+function addToSammenligningSmall(befolkning, sysselsatte){
+  var input_1 = document.getElementById("sammenligning_input_1").value;
+  bef_info = befolkning.getInfo(input_1);
+  if (typeof bef_info == "undefined"){
+    document.getElementById("table_sammenligning_hide").style.display = "none";
+    return;
+  }
+
+  var input_2 = document.getElementById("sammenligning_input_2").value;
+  bef_info = befolkning.getInfo(input_2);
+  if (typeof bef_info == "undefined"){
+    document.getElementById("table_sammenligning_hide").style.display = "none";
+    return;
+  }
+
+  sys_info_1 = sysselsatte.getInfo(input_1);
+  sys_info_2 = sysselsatte.getInfo(input_2);
+
+  var data = document.getElementById("small_table");
+  var table_1 = "<table ><thead><tr><th>Kommune</th><th>Kommunenummer</th><th>Menn</th><th>Kvinner</th></tr></thead><tbody>";
+  var table_2 = "<table ><thead><tr><th>Kommune</th><th>Kommunenummer</th><th>Menn</th><th>Kvinner</th></tr></thead><tbody>";
+
+  table_1 += "<tr><td>" + befolkning.getNameFrom(input_1) + "</td><td>" + input_1 + "</td><td>" + "2018: " + sys_info_1.Menn[2018] + "</td><td>" + "2018: " + sys_info_1.Kvinner[2018] + "</td></tr>";
+  table_2 += "<tr><td>" + befolkning.getNameFrom(input_2) + "</td><td>" + input_2 + "</td><td>" + "2018: " + sys_info_2.Menn[2018] + "</td><td>" + "2018: " + sys_info_2.Kvinner[2018] + "</td></tr>";
+
+  for (var year_1 = 2017; year_1 > 2004; year_1--) {
+    table_1 += "<tr><td>" + "" +  "</td><td>" + "" + "</td><td>" + year_1 + ": " + sys_info_1.Menn[year_1] + "</td><td>" + sys_info_1.Kvinner[year_1] + "</td></tr>";
+  }
+
+  for (var year_2 = 2017; year_2 > 2004; year_2--) {
+    table_2 += "<tr><td>" + "" +  "</td><td>" + "" + "</td><td>" + year_2 + ": " + sys_info_2.Menn[year_2] + "</td><td>" + sys_info_2.Kvinner[year_2] + "</td></tr>";
+  }
+
+  table_1 += "</tbody></table>";
+  table_2 += "</tbody></table>";
+  data.innerHTML = table_1 + table_2;
 }
 
 var befolkning_url = "http://wildboy.uib.no/~tpe056/folk/104857.json";

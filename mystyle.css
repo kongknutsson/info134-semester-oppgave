@@ -222,17 +222,17 @@ td, th{
   }
 
   #detaljer_table{
-    width: 100%;
-    font-size: 12px;
-  }
+  width: 100%;
+  font-size: 12px;
+}
 
-  #detaljer_input{
-    width: 100%;
-    font-size: 10px;
-    padding: 12px 20px 12px 40px;
-    border: 1px solid black;
-    margin: 20px;
-  }
+#detaljer_input{
+  width: 100%;
+  font-size: 10px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid black;
+  margin: 20px;
+}
 
   #sammenligning_table_1_big{
     display: none;
@@ -240,5 +240,25 @@ td, th{
 
   #sammenligning_table_2_big{
     display: none;
+  }
+
+  #small_table table{
+    width: 100%;
+    border: 1px solid black;
+    margin-bottom: 5vh;
+  }
+
+  #small_table th{
+    border: 1px solid black;
+    border-right: none;
+    border-left: none;
+    font-size: 12px;
+  }
+
+  #small_table td{
+    border: 1px solid black;
+    border-right: none;
+    border-left: none;
+    font-size: 12px;
   }
 }
