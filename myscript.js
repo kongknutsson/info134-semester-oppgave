@@ -210,11 +210,11 @@ function addToSammenligningSmall(befolkning, sysselsatte){
   table_2 += "<tr><td>" + befolkning.getNameFrom(input_2) + "</td><td>" + input_2 + "</td><td>" + "2018: " + sys_info_2.Menn[2018] + "</td><td>" + "2018: " + sys_info_2.Kvinner[2018] + "</td></tr>";
   //Fyller inn resten av dataene om sysselsatte i kommunen i den første tabellen som skal brukes til å sammenligne
   for (var year_1 = 2017; year_1 > 2004; year_1--) {
-    table_1 += "<tr><td>" + "" +  "</td><td>" + "" + "</td><td>" + year_1 + ": " + sys_info_1.Menn[year_1] + "</td><td>" + sys_info_1.Kvinner[year_1] + "</td></tr>";
+    table_1 += "<tr><td>" + "" +  "</td><td>" + "" + "</td><td>" + year_1 + ": " + sys_info_1.Menn[year_1] + "</td><td>" + year_1 + ": " + sys_info_1.Kvinner[year_1] + "</td></tr>";
   }
   //Fyller inn resten av dataene om sysselsatte i kommunen i den andre tabellen som skal brukes til å sammenligne
   for (var year_2 = 2017; year_2 > 2004; year_2--) {
-    table_2 += "<tr><td>" + "" +  "</td><td>" + "" + "</td><td>" + year_2 + ": " + sys_info_2.Menn[year_2] + "</td><td>" + sys_info_2.Kvinner[year_2] + "</td></tr>";
+    table_2 += "<tr><td>" + "" +  "</td><td>" + "" + "</td><td>" + year_2 + ": " + sys_info_2.Menn[year_2] + "</td><td>" + year_2 + ": " + sys_info_2.Kvinner[year_2] + "</td></tr>";
   }
   //Avslutter table tagene og henter de ut og skriver de inn i på siden
   table_1 += "</tbody></table>";
