@@ -36,6 +36,10 @@ h1 {
   text-align: center;
 }
 
+#small_table{
+  display: none;
+}
+
 #tableHide{
   display: block;
 }
