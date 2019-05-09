@@ -168,27 +168,61 @@ function addToTest_2(){
   addToSammenligning_2(befolkning, sysselsatte)
 }
 
-function addToSammenligning(befolkning, sysselsatte, identifier){
-  var input = document.getElementById("sammenligning_input_" + identifier).value;
-  bef_info = befolkning.getInfo(input);
+function addToSammenligning_1(befolkning, sysselsatte){
+  var input_1 = document.getElementById("sammenligning_input_1").value;
+  submitOK = "true";
+  bef_info = befolkning.getInfo(input_1);
+  // Her har man fått ugyldig input
   if (typeof bef_info == "undefined"){
     document.getElementById("table_sammenligning_hide").style.display = "none";
     return;
   }
-  document.getElementById("output_kommunenavn_" + identifier).innerHTML = befolkning.getNameFrom(input);
-  document.getElementById("output_kommunenr_" + identifier).innerHTML = input;
-  sys_info = sysselsatte.getInfo(input);
+  sys_info = sysselsatte.getInfo(input_1);
 
+  // Setter inn informasjonen i HTML doc.
+  document.getElementById("output_kommunenavn_1").innerHTML = befolkning.getNameFrom(input_1);
+  document.getElementById("output_kommunenr_1").innerHTML = input_1;
   for (var year = 2018; year > 2005; year--){
     year = year.toString();
-    var current_id = "output_menn_arbeid_" + identifier +  "_" + year;
+    var current_id = "output_menn_arbeid_1_" + year;
     document.getElementById(current_id).innerHTML = sys_info.Menn[year];
   }
 
   for (var year = 2018; year > 2005; year--){
     year = year.toString();
-    var current_id = "output_kvinner_arbeid_" + identifier +  "_" + year;
+    var current_id = "output_kvinner_arbeid_1_" + year;
     document.getElementById(current_id).innerHTML = sys_info.Kvinner[year];
   }
+  document.getElementById("table_sammenligning_hide").style.display = "block";
+}
+
+
+function addToSammenligning_2(befolkning, sysselsatte){
+  var input_2 = document.getElementById("sammenligning_input_2").value;
+  submitOK = "true";
+  bef_info = befolkning.getInfo(input_2);
+  if (typeof bef_info == "undefined"){
+    document.getElementById("table_sammenligning_hide").style.display = "none";
+    return;
+  }
+  document.getElementById("output_kommunenavn_2").innerHTML = befolkning.getNameFrom(input_2);
+  document.getElementById("output_kommunenr_2").innerHTML = input_2;
+
+  sys_info = sysselsatte.getInfo(input_2);
+
+  for (var year = 2018; year > 2005; year--){
+    year = year.toString();
+    var current_id = "output_menn_arbeid_2_" + year;
+    document.getElementById(current_id).innerHTML = sys_info.Menn[year];
+    var current_id_2 = "small_output_menn_arbeid_2_" + year;
+    document.getElementById(current_id_2).innerHTML = sys_info.Menn[year]
+  }
+
+  for (var year = 2018; year > 2005; year--){
+    year = year.toString();
+    var current_id = "output_kvinner_arbeid_2_" + year;
+    document.getElementById(current_id).innerHTML = sys_info.Kvinner[year];
+  }
+
   document.getElementById("table_sammenligning_hide").style.display = "block";
 }
