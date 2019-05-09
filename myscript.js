@@ -232,34 +232,17 @@ function addToSammenligning_2(befolkning, sysselsatte){
   document.getElementById("output_kommunenr_2").innerHTML = input_2;
 
   sys_info = sysselsatte.getInfo(input_2);
-  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2018").innerHTML = "2018: " + sys_info.Menn[2018];
-  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2017").innerHTML = "2017: " + sys_info.Menn[2017];
-  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2016").innerHTML = "2016: " + sys_info.Menn[2016];
-  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2015").innerHTML = "2015: " + sys_info.Menn[2015];
-  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2014").innerHTML = "2014: " + sys_info.Menn[2014];
-  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2013").innerHTML = "2013: " + sys_info.Menn[2013];
-  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2012").innerHTML = "2012: " + sys_info.Menn[2012];
-  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2011").innerHTML = "2011: " + sys_info.Menn[2011];
-  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2010").innerHTML = "2010: " + sys_info.Menn[2010];
-  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2009").innerHTML = "2009: " + sys_info.Menn[2009];
-  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2008").innerHTML = "2008: " + sys_info.Menn[2008];
-  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2007").innerHTML = "2007: " + sys_info.Menn[2007];
-  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2006").innerHTML = "2006: " + sys_info.Menn[2006];
-  var menn_Arbeid = document.getElementById("output_menn_arbeid_2_2005").innerHTML = "2005: " + sys_info.Menn[2005];
-  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2018").innerHTML = "2018: " + sys_info.Kvinner[2018];
-  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2017").innerHTML = "2017: " + sys_info.Kvinner[2017];
-  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2016").innerHTML = "2016: " + sys_info.Kvinner[2016];
-  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2015").innerHTML = "2015: " + sys_info.Kvinner[2015];
-  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2014").innerHTML = "2014: " + sys_info.Kvinner[2014];
-  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2013").innerHTML = "2013: " + sys_info.Kvinner[2013];
-  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2012").innerHTML = "2012: " + sys_info.Kvinner[2012];
-  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2011").innerHTML = "2011: " + sys_info.Kvinner[2011];
-  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2010").innerHTML = "2010: " + sys_info.Kvinner[2010];
-  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2009").innerHTML = "2009: " + sys_info.Kvinner[2009];
-  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2008").innerHTML = "2008: " + sys_info.Kvinner[2008];
-  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2007").innerHTML = "2007: " + sys_info.Kvinner[2007];
-  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2006").innerHTML = "2006: " + sys_info.Kvinner[2006];
-  var kvinner_Arbeid = document.getElementById("output_kvinner_arbeid_2_2005").innerHTML = "2005: " + sys_info.Kvinner[2005];
-
+  
+  for (var year = 2018; year > 2005; year--){
+    year = year.toString();
+    var current_id = "output_menn_arbeid_1_" + year;
+    document.getElementById(current_id).innerHTML = year + ": " + sys_info.Menn[2018];
+  }
+  for (var year = 2018; year > 2005; year--){
+    year = year.toString();
+    var current_id = "output_kvinner_arbeid_1_" + year;
+    document.getElementById(current_id).innerHTML = year + ": " + sys_info.Kvinner[2018];
+  }
+  
   document.getElementById("table_sammenligning_hide").style.display = "block";
 }
