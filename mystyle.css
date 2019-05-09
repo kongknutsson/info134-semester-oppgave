@@ -237,9 +237,4 @@ td, th{
   #sammenligning_table_2_big{
     display: none;
   }
-
-  td.output{
-    font-size: 5px;
-    color: red;
-  }
 }
