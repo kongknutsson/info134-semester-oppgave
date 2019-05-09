@@ -18,6 +18,7 @@ h1 {
   margin-top: 20vh;
 }
 
+
 #Introduksjon {
     display: block;
 }
@@ -165,18 +166,21 @@ td, th{
   text-align: center;
 }
 
-#sammenligning_table_1_big{
+#sammenligning_table_1_big, #sammenligning_table_2_big{
   border: 1px solid black;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5vh;
   margin-bottom: 5vh;
 }
 
+#sammenligning_table_1_big{
+  float: left;
+  margin-left: 12vw;
+}
+
 #sammenligning_table_2_big{
-  border: 1px solid black;
-  margin-left: auto;
-  margin-right: auto;
+  margin-right: 12vw;
+  float: right;
 }
 
 #sammenligning_table_1_small{
@@ -236,5 +240,10 @@ td, th{
 
   #sammenligning_table_2_big{
     display: none;
+  }
+
+  td.output{
+    font-size: 5px;
+    color: red;
   }
 }
