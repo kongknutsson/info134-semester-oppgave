@@ -33,41 +33,6 @@ function sammenligning(){
   document.getElementById("Sammenligning").style.display = "block";
 }
 
-
-oversikt_table = document.getElementById("oversikt_table");
-oversikt_navn = document.getElementById("oversikt_navn");
-oversikt_nummer = document.getElementById("oversikt_nummer");
-oversikt_befolkning = document.getElementById("oversikt_befolkning");
-function addToOversikt(skjema){
-  for (var key of Object.keys(skjema.elementer)) {
-    var row = oversikt_table.insertRow(1);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    cell1.classList.add("info");
-    cell2.classList.add("info");
-    cell3.classList.add("info");
-    cell1.innerHTML = key;
-    cell2.innerHTML = skjema.elementer[key].kommunenummer;
-    var menn = skjema.elementer[key].Menn[2018];
-    var kvinner = skjema.elementer[key].Kvinner[2018];
-    cell3.innerHTML = parseInt(menn) + parseInt(kvinner);
-  }
-}
-
-
-var befolkning_url = "http://wildboy.uib.no/~tpe056/folk/104857.json";
-var sysselsatte_url = "http://wildboy.uib.no/~tpe056/folk/100145.json";
-var utdanning_url =  "http://wildboy.uib.no/~tpe056/folk/85432.json";
-
-var befolkning = new my_constructor(befolkning_url);
-var sysselsatte = new my_constructor(sysselsatte_url);
-var utdanning = new my_constructor(utdanning_url);
-
-befolkning.load;
-sysselsatte.load;
-utdanning.load;
-
 function my_constructor(url){
   this.load = loader(url, this);
   this.skjema = this.load;
@@ -82,13 +47,15 @@ function my_constructor(url){
       return skjema;
     }
   }
+
   this.getNames = function(){
     tmp = [];
     for (kommune in this.skjema.elementer){
       tmp.push(kommune);
     }
     return tmp;
-  };
+  }
+
   this.getIDs = function(){
     tmp = [];
     for (kommune in this.skjema.elementer){
@@ -96,6 +63,7 @@ function my_constructor(url){
     }
     return tmp;
   }
+
   this.getInfo = function (kommunenummer){
     for (kommune in this.skjema.elementer){
       if (this.skjema.elementer[kommune].kommunenummer == kommunenummer){
@@ -103,6 +71,7 @@ function my_constructor(url){
       }
     }
   }
+
   this.getNameFrom = function(kommunenummer){
     for (kommune in this.skjema.elementer){
       if (this.skjema.elementer[kommune].kommunenummer == kommunenummer){
@@ -110,16 +79,15 @@ function my_constructor(url){
       }
     }
   }
-}
 
-//onload funker ikke
-my_constructor.prototype.onload = function(){
 }
-
-addToOversikt(befolkning.skjema);
 
 function addToTest(){
   addToDetaljer(befolkning, sysselsatte, utdanning)
+}
+function addToTest_2(){
+  addToSammenligning(befolkning, sysselsatte, 1)
+  addToSammenligning(befolkning, sysselsatte, 2)
 }
 
 function addToDetaljer(befolkning, sysselsatte, utdanning){
@@ -162,67 +130,63 @@ function addToDetaljer(befolkning, sysselsatte, utdanning){
 
   document.getElementById("tableHide").style.display = "block";
 }
-
-function addToTest_2(){
-  addToSammenligning_1(befolkning, sysselsatte)
-  addToSammenligning_2(befolkning, sysselsatte)
+function addToOversikt(skjema){
+  for (var key of Object.keys(skjema.elementer)) {
+    var row = document.getElementById("oversikt_table").insertRow(1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    cell1.classList.add("info");
+    cell2.classList.add("info");
+    cell3.classList.add("info");
+    cell1.innerHTML = key;
+    cell2.innerHTML = skjema.elementer[key].kommunenummer;
+    var menn = skjema.elementer[key].Menn[2018];
+    var kvinner = skjema.elementer[key].Kvinner[2018];
+    cell3.innerHTML = parseInt(menn) + parseInt(kvinner);
+  }
 }
 
-function addToSammenligning_1(befolkning, sysselsatte){
-  var input_1 = document.getElementById("sammenligning_input_1").value;
-  submitOK = "true";
-  bef_info = befolkning.getInfo(input_1);
-  // Her har man fått ugyldig input
+function addToSammenligning(befolkning, sysselsatte, identifier){
+  var input = document.getElementById("sammenligning_input_" + identifier).value;
+  bef_info = befolkning.getInfo(input);
   if (typeof bef_info == "undefined"){
     document.getElementById("table_sammenligning_hide").style.display = "none";
     return;
   }
-  sys_info = sysselsatte.getInfo(input_1);
+  document.getElementById("output_kommunenavn_" + identifier).innerHTML = befolkning.getNameFrom(input);
+  document.getElementById("output_kommunenr_" + identifier).innerHTML = input;
+  sys_info = sysselsatte.getInfo(input);
 
-  // Setter inn informasjonen i HTML doc.
-  document.getElementById("output_kommunenavn_1").innerHTML = befolkning.getNameFrom(input_1);
-  document.getElementById("output_kommunenr_1").innerHTML = input_1;
   for (var year = 2018; year > 2005; year--){
     year = year.toString();
-    var current_id = "output_menn_arbeid_1_" + year;
+    var current_id = "output_menn_arbeid_" + identifier +  "_" + year;
     document.getElementById(current_id).innerHTML = sys_info.Menn[year];
-  }
 
-  for (var year = 2018; year > 2005; year--){
-    year = year.toString();
-    var current_id = "output_kvinner_arbeid_1_" + year;
-    document.getElementById(current_id).innerHTML = sys_info.Kvinner[year];
-  }
-  document.getElementById("table_sammenligning_hide").style.display = "block";
-}
-
-
-function addToSammenligning_2(befolkning, sysselsatte){
-  var input_2 = document.getElementById("sammenligning_input_2").value;
-  submitOK = "true";
-  bef_info = befolkning.getInfo(input_2);
-  if (typeof bef_info == "undefined"){
-    document.getElementById("table_sammenligning_hide").style.display = "none";
-    return;
-  }
-  document.getElementById("output_kommunenavn_2").innerHTML = befolkning.getNameFrom(input_2);
-  document.getElementById("output_kommunenr_2").innerHTML = input_2;
-
-  sys_info = sysselsatte.getInfo(input_2);
-
-  for (var year = 2018; year > 2005; year--){
-    year = year.toString();
-    var current_id = "output_menn_arbeid_2_" + year;
-    document.getElementById(current_id).innerHTML = sys_info.Menn[year];
-    var current_id_2 = "small_output_menn_arbeid_2_" + year;
+    var current_id_2 = "small_output_menn_arbeid_" + identifier +  "_" + year;
     document.getElementById(current_id_2).innerHTML = sys_info.Menn[year]
   }
 
   for (var year = 2018; year > 2005; year--){
     year = year.toString();
-    var current_id = "output_kvinner_arbeid_2_" + year;
+    var current_id = "output_kvinner_arbeid_" + identifier +  "_" + year;
     document.getElementById(current_id).innerHTML = sys_info.Kvinner[year];
-  }
 
+    var current_id_2 = "small_output_kvinner_arbeid_" + identifier +  "_" + year;
+    document.getElementById(current_id_2).innerHTML = sys_info.Kvinner[year]
+  }
   document.getElementById("table_sammenligning_hide").style.display = "block";
 }
+
+var befolkning_url = "http://wildboy.uib.no/~tpe056/folk/104857.json";
+var sysselsatte_url = "http://wildboy.uib.no/~tpe056/folk/100145.json";
+var utdanning_url =  "http://wildboy.uib.no/~tpe056/folk/85432.json";
+
+var befolkning = new my_constructor(befolkning_url);
+var sysselsatte = new my_constructor(sysselsatte_url);
+var utdanning = new my_constructor(utdanning_url);
+
+befolkning.load;
+sysselsatte.load;
+utdanning.load;
+addToOversikt(befolkning.skjema);
