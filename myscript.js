@@ -158,23 +158,33 @@ function addToSammenligning(befolkning, sysselsatte, identifier){
   document.getElementById("output_kommunenr_" + identifier).innerHTML = input;
   sys_info = sysselsatte.getInfo(input);
 
-  for (var year = 2018; year > 2005; year--){
+
+  for (var year = 2018; year > 2004; year--){
     year = year.toString();
     var current_id = "output_menn_arbeid_" + identifier +  "_" + year;
     document.getElementById(current_id).innerHTML = sys_info.Menn[year];
-
     var current_id_2 = "small_output_menn_arbeid_" + identifier +  "_" + year;
     document.getElementById(current_id_2).innerHTML = sys_info.Menn[year]
+    // Om tallet er 0, altså ingen data, så skriver den heller n/a istedenfor tallet.
+    if (sys_info.Menn[year] == 0) {
+      document.getElementById(current_id).innerHTML = "n/a";
+      document.getElementById(current_id_2).innerHTML = "n/a";
+    }
   }
 
-  for (var year = 2018; year > 2005; year--){
+  for (var year = 2018; year > 2004; year--){
     year = year.toString();
     var current_id = "output_kvinner_arbeid_" + identifier +  "_" + year;
     document.getElementById(current_id).innerHTML = sys_info.Kvinner[year];
-
     var current_id_2 = "small_output_kvinner_arbeid_" + identifier +  "_" + year;
     document.getElementById(current_id_2).innerHTML = sys_info.Kvinner[year]
+    // Om tallet er 0, altså ingen data, så skriver den heller n/a istedenfor tallet.
+    if (sys_info.Kvinner[year] == 0) {
+      document.getElementById(current_id).innerHTML = "n/a";
+      document.getElementById(current_id_2).innerHTML = "n/a";
+    }
   }
+  
   document.getElementById("table_sammenligning_hide").style.display = "block";
 }
 
