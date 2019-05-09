@@ -155,11 +155,12 @@ function addToSammenligningBig(befolkning, sysselsatte, identifier){
     document.getElementById("table_sammenligning_hide").style.display = "none";
     return;
   }
+  //Fyller inn data for kommunen(navn og nr.)
   document.getElementById("output_kommunenavn_" + identifier).innerHTML = befolkning.getNameFrom(input);
   document.getElementById("output_kommunenr_" + identifier).innerHTML = input;
+
   sys_info = sysselsatte.getInfo(input);
-
-
+  //Fyller inn data for sysselsatte menn
   for (var year = 2018; year > 2004; year--){
     year = year.toString();
     var current_id = "output_menn_arbeid_" + identifier +  "_" + year;
@@ -169,7 +170,7 @@ function addToSammenligningBig(befolkning, sysselsatte, identifier){
       document.getElementById(current_id).innerHTML = "n/a";
     }
   }
-
+  //Fyller inn data for sysselsatte kvinner
   for (var year = 2018; year > 2004; year--){
     year = year.toString();
     var current_id = "output_kvinner_arbeid_" + identifier +  "_" + year;
@@ -200,22 +201,22 @@ function addToSammenligningSmall(befolkning, sysselsatte){
 
   sys_info_1 = sysselsatte.getInfo(input_1);
   sys_info_2 = sysselsatte.getInfo(input_2);
-
+  //Oppretter table tagen som skal vises på sammenligning siden, samt oppretter table headings til tabellene
   var data = document.getElementById("small_table");
   var table_1 = "<table ><thead><tr><th>Kommune</th><th>Kommunenummer</th><th>Menn</th><th>Kvinner</th></tr></thead><tbody>";
   var table_2 = "<table ><thead><tr><th>Kommune</th><th>Kommunenummer</th><th>Menn</th><th>Kvinner</th></tr></thead><tbody>";
-
+  //Fyller inn data om kommunen inn i tabellen (Kommune, Kommunenr. og første data siste året ifra sysselsatte(2018) menn og kvinner)
   table_1 += "<tr><td>" + befolkning.getNameFrom(input_1) + "</td><td>" + input_1 + "</td><td>" + "2018: " + sys_info_1.Menn[2018] + "</td><td>" + "2018: " + sys_info_1.Kvinner[2018] + "</td></tr>";
   table_2 += "<tr><td>" + befolkning.getNameFrom(input_2) + "</td><td>" + input_2 + "</td><td>" + "2018: " + sys_info_2.Menn[2018] + "</td><td>" + "2018: " + sys_info_2.Kvinner[2018] + "</td></tr>";
-
+  //Fyller inn resten av dataene om sysselsatte i kommunen i den første tabellen som skal brukes til å sammenligne
   for (var year_1 = 2017; year_1 > 2004; year_1--) {
     table_1 += "<tr><td>" + "" +  "</td><td>" + "" + "</td><td>" + year_1 + ": " + sys_info_1.Menn[year_1] + "</td><td>" + sys_info_1.Kvinner[year_1] + "</td></tr>";
   }
-
+  //Fyller inn resten av dataene om sysselsatte i kommunen i den andre tabellen som skal brukes til å sammenligne
   for (var year_2 = 2017; year_2 > 2004; year_2--) {
     table_2 += "<tr><td>" + "" +  "</td><td>" + "" + "</td><td>" + year_2 + ": " + sys_info_2.Menn[year_2] + "</td><td>" + sys_info_2.Kvinner[year_2] + "</td></tr>";
   }
-
+  //Avslutter table tagene og henter de ut og skriver de inn i på siden
   table_1 += "</tbody></table>";
   table_2 += "</tbody></table>";
   data.innerHTML = table_1 + table_2;

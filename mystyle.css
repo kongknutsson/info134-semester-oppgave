@@ -36,10 +36,6 @@ h1 {
   text-align: center;
 }
 
-#small_table{
-  display: none;
-}
-
 #tableHide{
   display: block;
 }
@@ -203,6 +199,10 @@ td, th{
   }
 
   #sammenligning_table_2_small{
+    display: none;
+  }
+
+  #small_table table{
     display: none;
   }
 }
