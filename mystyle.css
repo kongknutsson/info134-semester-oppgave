@@ -204,7 +204,7 @@ td, th{
     display: none;
   }
 
-  #small_table_1 table, #small_table_2 table{
+  #small_table_1, #small_table_2{
     display: none;
   }
 

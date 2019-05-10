@@ -213,8 +213,8 @@ function highlightBestData(){
       }
     }
   }
-
 }
+
 
 var befolkning_url = "http://wildboy.uib.no/~tpe056/folk/104857.json";
 var sysselsatte_url = "http://wildboy.uib.no/~tpe056/folk/100145.json";
