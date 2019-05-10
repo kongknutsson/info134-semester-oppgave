@@ -34,11 +34,10 @@ function sammenligning(){
 }
 
 function my_constructor(url){
-  this.load = loader(url, this);
+  this.load = loader(url);
   this.skjema = this.load;
   this.onload = null;
-
-  function loader(link, myObject){
+  function loader(link){
     var xhr = new XMLHttpRequest();
     xhr.open("GET", link, false);
     xhr.send();
@@ -47,7 +46,6 @@ function my_constructor(url){
       return skjema;
     }
   }
-
   this.getNames = function(){
     tmp = [];
     for (kommune in this.skjema.elementer){
@@ -55,7 +53,6 @@ function my_constructor(url){
     }
     return tmp;
   }
-
   this.getIDs = function(){
     tmp = [];
     for (kommune in this.skjema.elementer){
@@ -63,7 +60,6 @@ function my_constructor(url){
     }
     return tmp;
   }
-
   this.getInfo = function (kommunenummer){
     for (kommune in this.skjema.elementer){
       if (this.skjema.elementer[kommune].kommunenummer == kommunenummer){
@@ -71,7 +67,7 @@ function my_constructor(url){
       }
     }
   }
-
+  // Returnerer navnet til et kommunenummer.
   this.getNameFrom = function(kommunenummer){
     for (kommune in this.skjema.elementer){
       if (this.skjema.elementer[kommune].kommunenummer == kommunenummer){
@@ -79,59 +75,49 @@ function my_constructor(url){
       }
     }
   }
-
 }
 
-function addToTest(){
-  addToDetaljer(befolkning, sysselsatte, utdanning)
-}
-function addToTest_2(){
-  addToSammenligningBig(befolkning, sysselsatte, 1)
-  addToSammenligningBig(befolkning, sysselsatte, 2)
-  addToSammenligningSmall(befolkning, sysselsatte)
-}
-
-function addToDetaljer(befolkning, sysselsatte, utdanning){
+function loadInfoToDetaljer(befolkning, sysselsatte, utdanning){
   var input = document.getElementById("searchbarText").value;
-  submitOK = 'true';
-
   bef_info = befolkning.getInfo(input);
+  sys_info = sysselsatte.getInfo(input);
+  utd_info = utdanning.getInfo(input);
+  // Om det allerede var informasjon i tabellen blir det clearet ut.
+  clearTable("detaljer_hoved");
+  clearTable("detaljer_menn");
+  clearTable("detaljer_kvinner");
+  // Sjekker at inputen man har mottatt ikke er undefined
   if (typeof bef_info == "undefined"){
     document.getElementById("tableHide").style.display = "none";
     return;
   }
-
-  document.getElementById("output_kommune").innerHTML = befolkning.getNameFrom(input);
-  document.getElementById("output_nummer").innerHTML = input;
-  document.getElementById("output_menn").innerHTML = bef_info.Menn[2018];
-  document.getElementById("output_kvinner").innerHTML = bef_info.Kvinner[2018];
-
-  //fyller ut data for sysselsatte
-  sys_info = sysselsatte.getInfo(input);
-  var mennIArbeid = document.getElementById("output_mennIArbeid").innerHTML = sys_info.Menn[2018];
-  var kvinnerIArbeid = document.getElementById("output_kvinnerIArbeid").innerHTML = sys_info.Kvinner[2018];
-  document.getElementById("output_beggeKjønn").innerHTML = sys_info["Begge kjønn"][2018];
-
-  //fyller ut data om menns utdanning
-  utd_info = utdanning.getInfo(input);
-  document.getElementById("01M").innerHTML = utd_info["01"].Menn[2017];
-  document.getElementById('02aM').innerHTML = utd_info["02a"].Menn[2017];
-  document.getElementById("11M").innerHTML = utd_info['11'].Menn[2017];
-  document.getElementById("03aM").innerHTML = utd_info["03a"].Menn[2017];
-  document.getElementById("04aM").innerHTML = utd_info["04a"].Menn[2017];
-  document.getElementById("09aM").innerHTML = utd_info["09a"].Menn[2017];
-
-  //fyller ut data om kvinnes utdanning
-  document.getElementById("01K").innerHTML = utd_info["01"].Kvinner[2017];
-  document.getElementById("02aK").innerHTML = utd_info["02a"].Kvinner[2017];
-  document.getElementById("11K").innerHTML = utd_info["11"].Kvinner[2017];
-  document.getElementById("03aK").innerHTML = utd_info["03a"].Kvinner[2017];
-  document.getElementById("04aK").innerHTML = utd_info["04a"].Kvinner[2017];
-  document.getElementById("09aK").innerHTML = utd_info["09a"].Kvinner[2017];
-
+  // Fyller inn data i detaljer table. Her legges all "hoved" infoen om kommunen
+  addRowTo("detaljer_hoved", "Kommunenavn", befolkning.getNameFrom(input));
+  addRowTo("detaljer_hoved", "Kommune nummer", input);
+  addRowTo("detaljer_hoved", "Antall menn", bef_info.Menn[2018]);
+  addRowTo("detaljer_hoved", "Antall kvinner", bef_info.Kvinner[2018]);
+  addRowTo("detaljer_hoved", "Menn i arbeid %", sys_info.Menn[2018]);
+  addRowTo("detaljer_hoved", "Kvinner i arbeid %", sys_info.Kvinner[2018]);
+  addRowTo("detaljer_hoved", "Begge kjønn i arbeid %", sys_info["Begge kjønn"][2018]);
+  // fyller ut data om menns utdanning
+  addRowTo("detaljer_menn", "Grunnskolenivå", utd_info["01"].Menn[2017]);
+  addRowTo("detaljer_menn", "VGS", utd_info["02a"].Menn[2017]);
+  addRowTo("detaljer_menn", "Fagskolenivå", utd_info['11'].Menn[2017]);
+  addRowTo("detaljer_menn", "Universitet/høyskolenivå kort", utd_info["03a"].Menn[2017]);
+  addRowTo("detaljer_menn", "Universitet/høyskolenivå lang", utd_info["04a"].Menn[2017]);
+  addRowTo("detaljer_menn", "Uoppgitt/ingen utdanning", utd_info["09a"].Menn[2017]);
+  // fyller ut data om kvinnes utdanning
+  addRowTo("detaljer_kvinner", "Grunnskolenivå", utd_info["01"].Kvinner[2017]);
+  addRowTo("detaljer_kvinner", "VGS", utd_info["02a"].Kvinner[2017]);
+  addRowTo("detaljer_kvinner", "Fagskolenivå", utd_info['11'].Kvinner[2017]);
+  addRowTo("detaljer_kvinner", "Universitet/høyskolenivå kort", utd_info["03a"].Kvinner[2017]);
+  addRowTo("detaljer_kvinner", "Universitet/høyskolenivå lang", utd_info["04a"].Kvinner[2017]);
+  addRowTo("detaljer_kvinner", "Uoppgitt/ingen utdanning", utd_info["09a"].Kvinner[2017]);
+  // Til slutt viser vi frem tabellen
   document.getElementById("tableHide").style.display = "block";
 }
-function addToOversikt(skjema){
+
+function loadInfoToOversikt(skjema){
   for (var key of Object.keys(skjema.elementer)) {
     var row = document.getElementById("oversikt_table").insertRow(1);
     var cell1 = row.insertCell(0);
@@ -148,83 +134,86 @@ function addToOversikt(skjema){
   }
 }
 
-function addToSammenligningBig(befolkning, sysselsatte, identifier){
+function loadInfoToSammenligning(befolkning, sysselsatte, identifier){
   var input = document.getElementById("sammenligning_input_" + identifier).value;
-  bef_info = befolkning.getInfo(input);
+  var current_table = "sammenligning_table_" + identifier;
+  var bef_info = befolkning.getInfo(input);
+  var sys_info = sysselsatte.getInfo(input);
+  clearTable(current_table);
   if (typeof bef_info == "undefined"){
     document.getElementById("table_sammenligning_hide").style.display = "none";
     return;
   }
-  //Fyller inn data for kommunen(navn og nr.)
-  document.getElementById("output_kommunenavn_" + identifier).innerHTML = befolkning.getNameFrom(input);
-  document.getElementById("output_kommunenr_" + identifier).innerHTML = input;
 
-  sys_info = sysselsatte.getInfo(input);
-  //Fyller inn data for sysselsatte menn
+  //Fyller inn data for sysselsatte menn og kvinner i loops
+  addRowTo(current_table, "Kommune", befolkning.getNameFrom(input));
+  addRowTo(current_table, "Kommunenummer", input);
+  addRowTo(current_table, "Menn i arbeid", "");
   for (var year = 2018; year > 2004; year--){
-    year = year.toString();
-    var current_id = "output_menn_arbeid_" + identifier +  "_" + year;
-    document.getElementById(current_id).innerHTML = sys_info.Menn[year];
-    // Om tallet er 0, altså ingen data, så skriver den heller n/a istedenfor tallet.
-    if (sys_info.Menn[year] == 0) {
-      document.getElementById(current_id).innerHTML = "n/a";
-    }
+    addRowTo(current_table, year, sys_info.Menn[year])
   }
-  //Fyller inn data for sysselsatte kvinner
+  addRowTo(current_table, "Kvinner i arbeid", "");
   for (var year = 2018; year > 2004; year--){
-    year = year.toString();
-    var current_id = "output_kvinner_arbeid_" + identifier +  "_" + year;
-    document.getElementById(current_id).innerHTML = sys_info.Kvinner[year];
-    // Om tallet er 0, altså ingen data, så skriver den heller n/a istedenfor tallet.
-    if (sys_info.Kvinner[year] == 0) {
-      document.getElementById(current_id).innerHTML = "n/a";
-    }
+    addRowTo(current_table, year, sys_info.Kvinner[year]);
   }
 
+  // Opretter og legger inn data i et table hvis man er på en liten skjerm eller mobil.
+  var data = document.getElementById("small_table_" + identifier);
+  var table = befolkning.getNameFrom(input) + " " + input +  "<table><thead><tr><th>Menn</th><th>Kvinner</th></tr></thead><tbody>";
+  for (var year = 2018; year > 2004; year--){
+    table += "<tr><td>" + year + ":<br>" + sys_info.Menn[year] + "</td><td>" + year + ":<br>" + sys_info.Kvinner[year] + "</td></tr>";
+  }
+  table += "</tbody></table>";
+  data.innerHTML = table;
+  // Setter til slutt at alt denne funksjoner har gjort skal være synlig.
   document.getElementById("table_sammenligning_hide").style.display = "block";
 }
 
-function addToSammenligningSmall(befolkning, sysselsatte){
-  var input_1 = document.getElementById("sammenligning_input_1").value;
-  bef_info = befolkning.getInfo(input_1);
-  if (typeof bef_info == "undefined"){
-    document.getElementById("table_sammenligning_hide").style.display = "none";
-    return;
+// Legger til en ny rad i et table. Description er en string som breskriver dataen.
+function addRowTo(tableID, description, data){
+  var new_row = document.getElementById(tableID).insertRow(-1);
+  cell1 = new_row.insertCell(0);
+  cell2 = new_row.insertCell(1);
+  cell1.classList.add("info");
+  cell2.classList.add("output");
+  cell1.innerHTML = description;
+  cell2.innerHTML = data;
+}
+// Fjerner alt innholdet i et table.
+function clearTable(table){
+  document.getElementById(table).innerHTML = "";
+}
+// Brukes av knapper i HTML dokumentet til å laste inn info.
+function addToDetaljer(){
+  loadInfoToDetaljer(befolkning, sysselsatte, utdanning)
+}
+// Brukes av knapper i HTML dokumentet til å laste inn info.
+function addToSammenligning(){
+  // Parameter nr 3 sier ifra om inputen er fra input1 eller input2.
+  loadInfoToSammenligning(befolkning, sysselsatte, 1);
+  loadInfoToSammenligning(befolkning, sysselsatte, 2);
+  highlightBestData();
+}
+
+function highlightBestData(){
+  var table_left = document.getElementById("sammenligning_table_1");
+  var table_right = document.getElementById("sammenligning_table_2");
+  for (var i = 3, row; row = table_left.rows[i]; i++) {
+    year_left = parseInt(row.cells[0].innerHTML);
+    data_left = parseInt(row.cells[1].innerHTML);
+
+    if (!isNaN(year_left) && !isNaN(data_left)){
+      data_right = parseInt(table_right.rows[i].cells[1].innerHTML)
+      if (data_right > data_left){
+        table_right.rows[i].cells[1].classList.add("winner");
+        row.cells[1].classList.add("loser");
+      } else {
+        table_right.rows[i].cells[1].classList.add("loser");
+        row.cells[1].classList.add("winner");
+      }
+    }
   }
 
-  var input_2 = document.getElementById("sammenligning_input_2").value;
-  bef_info = befolkning.getInfo(input_2);
-  if (typeof bef_info == "undefined"){
-    document.getElementById("table_sammenligning_hide").style.display = "none";
-    return;
-  }
-
-  var kommune_1 = document.getElementById("info_kommune_1");
-  var kommune_2 = document.getElementById("info_kommune_2");
-  kommune_1.innerHTML = befolkning.getNameFrom(input_1) + " " + "Nr." + input_1;
-  kommune_2.innerHTML = befolkning.getNameFrom(input_2) + " " + "Nr." + input_2
-
-
-  sys_info_1 = sysselsatte.getInfo(input_1);
-  sys_info_2 = sysselsatte.getInfo(input_2);
-  //Oppretter table tagen som skal vises på sammenligning siden, samt oppretter table headings til tabellene
-  var data_1 = document.getElementById("small_table_1");
-  var data_2 = document.getElementById("small_table_2");
-  var table_1 = "<table><thead><tr><th>Menn</th><th>Kvinner</th></tr></thead><tbody>";
-  var table_2 = "<table><thead><tr><th>Menn</th><th>Kvinner</th></tr></thead><tbody>";
-  //Fyller inn resten av dataene om sysselsatte i kommunen i den første tabellen som skal brukes til å sammenligne
-  for (var year_1 = 2018; year_1 > 2004; year_1--) {
-    table_1 += "<tr><td>" + year_1 + ": " + sys_info_1.Menn[year_1] + "</td><td>" + year_1 + ": " + sys_info_1.Kvinner[year_1] + "</td></tr>";
-  }
-  //Fyller inn resten av dataene om sysselsatte i kommunen i den andre tabellen som skal brukes til å sammenligne
-  for (var year_2 = 2018; year_2 > 2004; year_2--) {
-    table_2 += "<tr><td>" + year_2 + ": " + sys_info_2.Menn[year_2] + "</td><td>" + year_2 + ": " + sys_info_2.Kvinner[year_2] + "</td></tr>";
-  }
-  //Avslutter table tagene og henter de ut og skriver de inn i på siden
-  table_1 += "</tbody></table>";
-  table_2 += "</tbody></table>";
-  data_1.innerHTML = table_1;
-  data_2.innerHTML = table_2;
 }
 
 var befolkning_url = "http://wildboy.uib.no/~tpe056/folk/104857.json";
@@ -238,4 +227,5 @@ var utdanning = new my_constructor(utdanning_url);
 befolkning.load;
 sysselsatte.load;
 utdanning.load;
-addToOversikt(befolkning.skjema);
+
+loadInfoToOversikt(befolkning.skjema);

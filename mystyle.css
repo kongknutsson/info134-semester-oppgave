@@ -61,6 +61,8 @@ span {
 
 #searchbar{
   text-align: center;
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 /**navigator**/
@@ -166,19 +168,19 @@ td, th{
   text-align: center;
 }
 
-#sammenligning_table_1_big, #sammenligning_table_2_big{
+#sammenligning_table_1, #sammenligning_table_2{
   border: 1px solid black;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 5vh;
 }
 
-#sammenligning_table_1_big{
+#sammenligning_table_1{
   float: left;
   margin-left: 12vw;
 }
 
-#sammenligning_table_2_big{
+#sammenligning_table_2{
   margin-right: 12vw;
   float: right;
 }
@@ -234,7 +236,7 @@ td, th{
     font-size: 16px;
   }
 
-  #detaljer_table{
+  #detaljer_hoved{
   width: 100%;
   font-size: 12px;
 }
@@ -247,11 +249,11 @@ td, th{
   margin: 20px;
 }
 
-  #sammenligning_table_1_big{
+  #sammenligning_table_1{
     display: none;
   }
 
-  #sammenligning_table_2_big{
+  #sammenligning_table_2{
     display: none;
   }
 
@@ -284,4 +286,18 @@ td, th{
   #info_kommune_1{
     font-size: 16px;
   }
+}
+
+
+.winner {
+  color: green;
+}
+.loser {
+  color: red;
+}
+
+#bottom {
+  position: fixed;
+  width: 50%;
+  bottom: 10px;
 }
